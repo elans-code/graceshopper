@@ -22,15 +22,15 @@ class SingleCarView extends React.Component{
         return (
             <div>{ cardata ? 
                 (<div>
-                    <div><h1>{cardata ? cardata.year : 'Loading year'} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></div>
-                    <div><img src= {cardata ? cardata.imageUrl : ''}/></div>
-                    <div><h2>Year: {cardata ? cardata.year : 'Loading year'}</h2></div>
-                    <div><h2>Make: {cardata ? cardata.make : 'Loading make'}</h2></div>
-                    <div><h2>Model: {cardata ? cardata.model : 'Loading model'}</h2></div>
-                    <div><h2>Color: {cardata ? cardata.color : 'Loading color'}</h2></div>
-                    <div><h2>Price: {cardata ? cardata.price : 'Loading price'}</h2></div>
-                    <div><h2>Description: {cardata ? cardata.description : 'Loading description'}</h2></div>
-                    <div><h2>Stock: {cardata ? cardata.quantity : 'Loading stock'}</h2></div>
+                    <div><h1>{cardata.year} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></div>
+                    <div><img src= {cardata.imageUrl}/></div>
+                    <div><h2>Year: {cardata.year}</h2></div>
+                    <div><h2>Make: {cardata.make}</h2></div>
+                    <div><h2>Model: {cardata.model}</h2></div>
+                    <div><h2>Color: {cardata.color}</h2></div>
+                    <div><h2>Price: {cardata.price}</h2></div>
+                    <div><h2>Description: {cardata.description}</h2></div>
+                    <div><h2>Stock: {cardata.quantity}</h2></div>
                     <div><button type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</button></div>
                 </div>)
                 : 'There is no car data'
