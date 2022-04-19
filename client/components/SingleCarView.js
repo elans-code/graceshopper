@@ -20,8 +20,9 @@ class SingleCarView extends React.Component{
         const cardata = this.props.cardata
         return (
             <div>
-                <section><h1>{cardata ? cardata.year : 'Loading year'} {cardata ? cardata.name : 'Loading year'}</h1></section>
+                <section><h1>{cardata ? cardata.year : 'Loading year'} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></section>
                 <section><img src= {cardata ? cardata.imageUrl : ''}/></section>
+                <section><h2>Year: {cardata ? cardata.year : 'Loading year'}</h2></section>
                 <section><h2>Make: {cardata ? cardata.make : 'Loading make'}</h2></section>
                 <section><h2>Model: {cardata ? cardata.model : 'Loading model'}</h2></section>
                 <section><h2>Color: {cardata ? cardata.color : 'Loading color'}</h2></section>
@@ -48,4 +49,4 @@ const mapDispatch = (dispatch) =>{
     }
 }
 
-export default connect(mapState)(SingleCarView)
+export default connect(mapState, mapDispatch)(SingleCarView)
