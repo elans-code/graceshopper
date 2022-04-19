@@ -21,7 +21,8 @@ class Cart extends React.Component{
     }
     render(){
         const cartdata = this.props.cartdata
-        const cartTotal = 0
+        let cartTotal = 0
+        let numberOfItems = 0
         return (
             <div>
                 <section><h1>{username ? username : "guest"}'s cart</h1></section>
@@ -30,6 +31,7 @@ class Cart extends React.Component{
                     cartdata.map((item) =>
                     {
                         cartTotal += item.price
+                        numberOfItems += item.quantity
                         return (
                         <section key={item.id}>
                             <section><h2>{item.name}</h2></section>
@@ -42,6 +44,7 @@ class Cart extends React.Component{
                     }
                 )}
                 </section>
+                <section><h2>Number of items in cart: {numberOfItems}</h2></section>
                 <section><h2>Subtotal: {cartTotal}</h2></section>
                 <section><input type='button' onClick={()=>{this.handleCheckout}}>Checkout</input></section>
             </div>
