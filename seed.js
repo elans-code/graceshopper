@@ -1,5 +1,7 @@
 const { green, red } = require("chalk");
-const { db, Car, User } = require("./server/db");
+const { db } = require("./server/db");
+const Car = require("./server/db/models/Car")
+const User = require("./server/db/models/User")
 
 const cars = [{
   year: '2022',
@@ -8,7 +10,7 @@ const cars = [{
   color: 'black',
   description: "good car",
   price: '25395',
-  stock: '2',
+  quantity: '2',
   imageUrl: 'https://media-service.carmax.com/img/vehicles/22237567/1_cleaned.jpg?width=800'
 
 
@@ -19,7 +21,7 @@ const cars = [{
   color: 'red',
   description: "good car",
   price: '150000',
-  stock: '1',
+  quantity: '1',
   imageUrl: 'https://www.supercars.net/blog/wp-content/uploads/2020/10/1990_ferrari_testarossa_1602079317b225e2589d78f41990_ferrari_testarossa_1601823305208495d5614f88edf-c282-4a34-8bef-60af03320f23-7GHiKL-1.jpg'
 
 },];
