@@ -18,15 +18,14 @@ class AllCars extends React.Component {
                 <Link to={`/cars/${car.id}`}>
                   <div>
                     <img src={car.imageUrl} width="225" height="225" />
-                    <p>{car.name}</p>
                     <ul>
-                      <li>{car.year}</li>
-                      <li>{car.make}</li>
-                      <li>{car.model}</li>
-                      <li>{car.color}</li>
-                      <li>{car.description}</li>
-                      <li>{car.price}</li>
-                      <li>{car.stock}</li>
+                      <li>Year: {car.year}</li>
+                      <li>Make: {car.make}</li>
+                      <li>Model: {car.model}</li>
+                      <li>Color: {car.color}</li>
+                      <li>Price: {car.price}</li>
+                      <li>Stock: {car.stock}</li>
+                      <li>Description:{car.description}</li>
                     </ul>
                   </div>
                 </Link>
