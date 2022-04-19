@@ -33,6 +33,7 @@ class Cart extends React.Component{
                         return (
                         <section key={item.id}>
                             <section><h2>{item.name}</h2></section>
+                            <section><img src={item.imageUrl}/></section>
                             <section><h2>Price: {item.price}</h2></section>
                             <section><h2>Quantity: {item.quantity}</h2></section>
                             <section><input type='button' onClick={()=>{this.handleRemoveItem(item.id)}}>Remove Item</input></section>
