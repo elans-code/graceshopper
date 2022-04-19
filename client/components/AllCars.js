@@ -8,26 +8,30 @@ class AllCars extends React.Component {
     this.props.getCars();
   }
 
+  addToCart() {
+      //add to cart
+      //add in this functionality 
+  }
+
   render() {
     return (
       <div>
-        <div>
+      {/* {console.log("HERE!!!", this.props)} */}
+        <div >
           {this.props.cars.map((car) => {
             return (
-              <div key={car.id}>
+              <div key={car.id} className="all-cars">
+                { console.log("car!!", car)}
                 <Link to={`/cars/${car.id}`}>
                   <div>
-                    <img src={car.imageUrl} width="225" height="225" />
-                    <ul>
-                      <li>Model: {car.model}</li>
-                      <li>Make: {car.make}</li>
-                      <li>Year: {car.year}</li>
-                      <li>Price: {car.price}</li>
-                      {/* <li>Color: {car.color}</li>
-                      <li>Stock: {car.stock}</li>
-                      <li>Description:{car.description}</li> */}
-                    </ul>
+                    <img className="all-cars-img" src={car.imageUrl} width="250" height="250" />
+                    <p>{car.make} {car.model} ({car.year})</p>
+                    {/* look into way to add thousand separator comma */}
+                    <p>${car.price}</p>
                   </div>
+                    <div>
+                     <button className="all-cars-btn" type="submit" onClick={()=> this.addToCart(car)} >Add to cart</button>
+                    </div>
                 </Link>
               </div>
             );

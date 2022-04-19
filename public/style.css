@@ -19,3 +19,22 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.all-cars {
+  text-align: center;
+  /* border: 1px solid blue; */
+  height: 375px;
+  width: 325px;
+  margin: 40px;
+  padding: 10px;
+  background: linear-gradient(white, skyblue);
+  border-radius: 25%;
+}
+.all-cars-btn {
+  margin-bottom: 5px;
+}
+
+.all-cars-img {
+  border-radius: 25%;
+  margin-top: 20px;
+}

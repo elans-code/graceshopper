@@ -26,7 +26,8 @@ const initialState = [];
 const carsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CARS:
-      return [...action.cars]
+      // return [...action.cars]
+      return action.cars
     default:
       return state;
   }
