@@ -10,9 +10,25 @@ label {
   display: block;
 }
 
+nav {
+  align-items: center;
+  background-color: #24305E; 
+  display: flex;
+  height:t 3em;
+  padding: 1em;
+  margin: 1em;
+  position: relative;
+}
+
+
 nav a {
   display: inline-block;
   margin: 1em;
+  color: #e0fbfc;
+}
+
+.nav-bar {
+color: #24305E; 
 }
 
 form div {

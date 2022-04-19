@@ -5,7 +5,6 @@ import AllCars from './components/AllCars';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
-import cars from './components/AllCars'
 import SingleCarView from './components/SingleCarView';
 
 /**
