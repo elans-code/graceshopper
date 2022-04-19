@@ -27,11 +27,13 @@ const cars = [{
 const users = [{
   name: 'Bob Smith',
   email: 'bsmith@gmail.com',
+  password: '123456789',
   dateOfBirth: '01/01/1950',
 },
 {
   name: 'Mary Smith',
   email: 'msith@gmail.com',
+  password: '123456789',
   dateOfBirth: '01/01/1965',
 },];
 
