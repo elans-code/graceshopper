@@ -19,34 +19,41 @@ class Cart extends React.Component{
     handleRemoveItem(itemId){
         //remove item from redux store
     }
+    handleQuantity(event){
+        const newQuantity = event.target.value
+        if(newQuantity>1){
+
+        }
+
+    }
     render(){
         const cartdata = this.props.cartdata
         let cartTotal = 0
         let numberOfItems = 0
         return (
             <div>
-                <section><h1>{username ? username : "guest"}'s cart</h1></section>
-                <section>
+                <div><h1>{username ? username : "guest"}'s cart</h1></div>
+                <div>
                 {
                     cartdata.map((item) =>
                     {
                         cartTotal += item.price
                         numberOfItems += item.quantity
                         return (
-                        <section key={item.id}>
-                            <section><h2>{item.name}</h2></section>
-                            <section><img src={item.imageUrl}/></section>
-                            <section><h2>Price: {item.price}</h2></section>
-                            <section><h2>Quantity: {item.quantity}</h2></section>
-                            <section><input type='button' onClick={()=>{this.handleRemoveItem(item.id)}}>Remove Item</input></section>
-                        </section>
+                        <div key={item.id}>
+                            <div><h2>{item.name}</h2></div>
+                            <div><img src={item.imageUrl}/></div>
+                            <div><h2>Price: {item.price}</h2></div>
+                            <div><h2>Quantity: </h2><input type='number' name={item.id} onChange={this.handleQuantity}>{item.quantity}</input></div>
+                            <div><input type='button' onClick={()=>{this.handleRemoveItem(item.id)}}>Remove Item</input></div>
+                        </div>
                         )
                     }
                 )}
-                </section>
-                <section><h2>Number of items in cart: {numberOfItems}</h2></section>
-                <section><h2>Subtotal: {cartTotal}</h2></section>
-                <section><input type='button' onClick={()=>{this.handleCheckout}}>Checkout</input></section>
+                </div>
+                <div><h2>Number of items in cart: {numberOfItems}</h2></div>
+                <div><h2>Subtotal: {cartTotal}</h2></div>
+                <div><input type='button' onClick={()=>{this.handleCheckout}}>Checkout</input></div>
             </div>
         )
     };
