@@ -20,16 +20,16 @@ class SingleCarView extends React.Component{
         const cardata = this.props.cardata
         return (
             <div>
-                <section><h1>{cardata ? cardata.year : 'Loading year'} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></section>
-                <section><img src= {cardata ? cardata.imageUrl : ''}/></section>
-                <section><h2>Year: {cardata ? cardata.year : 'Loading year'}</h2></section>
-                <section><h2>Make: {cardata ? cardata.make : 'Loading make'}</h2></section>
-                <section><h2>Model: {cardata ? cardata.model : 'Loading model'}</h2></section>
-                <section><h2>Color: {cardata ? cardata.color : 'Loading color'}</h2></section>
-                <section><h2>Price: {cardata ? cardata.price : 'Loading price'}</h2></section>
-                <section><h2>Description: {cardata ? cardata.description : 'Loading description'}</h2></section>
-                <section><h2>Stock: {cardata ? cardata.stock : 'Loading stock'}</h2></section>
-                <section><input type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</input></section>
+                <div><h1>{cardata ? cardata.year : 'Loading year'} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></div>
+                <div><img src= {cardata ? cardata.imageUrl : ''}/></div>
+                <div><h2>Year: {cardata ? cardata.year : 'Loading year'}</h2></div>
+                <div><h2>Make: {cardata ? cardata.make : 'Loading make'}</h2></div>
+                <div><h2>Model: {cardata ? cardata.model : 'Loading model'}</h2></div>
+                <div><h2>Color: {cardata ? cardata.color : 'Loading color'}</h2></div>
+                <div><h2>Price: {cardata ? cardata.price : 'Loading price'}</h2></div>
+                <div><h2>Description: {cardata ? cardata.description : 'Loading description'}</h2></div>
+                <div><h2>Stock: {cardata ? cardata.stock : 'Loading stock'}</h2></div>
+                <div><input type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</input></div>
             </div>
         )
     };
