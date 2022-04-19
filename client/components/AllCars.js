@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCars: () => dispatch(fetchCars),
+    getCars: () => dispatch(fetchCars()),
   };
 };
 
