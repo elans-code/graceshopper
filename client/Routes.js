@@ -31,11 +31,8 @@ class Routes extends Component {
             <Route path='/' exact component={ Login } />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-
             <Route exact path="/cars" component={AllCars} />
-            
-            <Route path="/cars/:id" component={SingleCarView} />
-
+            <Route exact path="/cars/:id" component={SingleCarView} />
           </Switch>
         )}
       </div>

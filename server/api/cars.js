@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
 // Get single car
 router.get("/:id", async (req, res, next) => {
   try {
-    const singleCar = Car.findByPk(req.params.id);
+    const singleCar = await Car.findByPk(req.params.id);
     res.json(singleCar);
   } catch (err) {
     next(err);
