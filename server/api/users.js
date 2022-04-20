@@ -20,3 +20,11 @@ router.get("/", requireToken, async (req, res, next) => {
     next(ex);
   }
 });
+
+router.post('/', async (req, res, next) => {
+  try {
+    res.status(201).send(await User.create(req.body));
+  } catch (error) {
+    next(error);
+  }
+});

@@ -6,6 +6,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
 import SingleCarView from './components/SingleCarView';
+import Registration from './components/Registration';
 
 /**
  * COMPONENT
@@ -29,7 +30,8 @@ class Routes extends Component {
           <Switch>
             <Route path='/' exact component={ Login } />
             <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
+            {/* <Route path="/signup" component={Signup} /> */}
+            <Route path="/signup" component={Registration} />
             <Route exact path="/cars" component={AllCars} />
             <Route exact path="/cars/:id" component={SingleCarView} />
           </Switch>
