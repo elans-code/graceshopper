@@ -2,14 +2,12 @@ import Axios from "axios";
 
 const CREATE_USER = 'CREATE_USER'
 
-
 const _createUser = (user) => {
   return {
     type: CREATE_USER,
     user,
   };
 };
-
 
 export const createUser = (user, history) => {
   return async (dispatch) => {
