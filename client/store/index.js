@@ -12,7 +12,7 @@ const reducer = combineReducers({
    auth,
    cars: carsReducer,
    cardata: singleCarReducer,
-   user: userReducer,
+   users: userReducer,
    userData: singleUserReducer,
    })
 const middleware = composeWithDevTools(
