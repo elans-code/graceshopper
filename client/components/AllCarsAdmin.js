@@ -4,6 +4,8 @@ import { fetchCars } from "../store/allCarsStore";
 import { Link } from "react-router-dom";
 import CreateCar from "./CreateCar";
 
+// not fully complete
+
 class AllCars extends React.Component {
   componentDidMount() {
     this.props.getCars();
