@@ -2,6 +2,9 @@ import axios from "axios";
 
 // Action Types
 const SET_CARS = "SET_CARS"
+const CREATE_CAR = "CREATE_CAR"
+const DELETE_CAR = "DELETE_CAR"
+const UPDATE_CAR = "UPDATE_CAR"
 
 // Action creators
 export const _setCars = (cars) => {
@@ -9,6 +12,27 @@ export const _setCars = (cars) => {
         type: SET_CARS,
         cars
     }
+}
+
+const _createCar = (car) => {
+  return {
+    type: CREATE_CAR,
+    car,
+  };
+};
+
+const _deleteCar = (car) => {
+  return {
+    type: DELETE_CAR,
+    car
+  }
+}
+
+const _updateCar = (car) => {
+  return {
+    type: UPDATE_CAR,
+    car
+  }
 }
 
 //Thunks
@@ -19,6 +43,26 @@ export const fetchCars = () => {
     }
 }
 
+export const createCar = (car) => {
+  return async (dispatch) => {
+    const { data } = await axios.post("/api/cars", car);
+    dispatch(_createCar(data));
+  };
+};
+
+export const deleteCar = (id) => {
+  return async (dispatch) => {
+    const {data} = await axios.delete(`/api/cars/${id}`)
+    dispatch(_deleteCar(data))
+  }
+}
+
+export const updateCar = (car) => {
+  return async (dispatch) => {
+    const {data} = await axios.put(`/api/cars/${car.id}`, car)
+    dispatch(_updateCar(data))
+  }
+}
 
 // reducer 
 
@@ -26,8 +70,13 @@ const initialState = [];
 const carsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CARS:
-      // return [...action.cars]
       return action.cars
+      case CREATE_CAR:
+        return [...state, action.car];
+      case DELETE_CAR:
+        return state.filter((car) => car.id !== action.car.id)
+      case UPDATE_CAR:
+        return state.map((car) => (car.id === action.car.id ? [...state, action.car] : car))
     default:
       return state;
   }

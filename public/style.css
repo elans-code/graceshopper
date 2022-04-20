@@ -54,3 +54,12 @@ form div {
   border-radius: 25%;
   margin-top: 20px;
 }
+
+.create-car {
+  border: 2px solid #24305E;
+  float: right;
+  margin: 15px 0 0 400px;
+  position: relative;
+  padding: 10px;
+  max-width: 200px;
+}
