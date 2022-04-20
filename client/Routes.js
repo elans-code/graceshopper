@@ -1,12 +1,13 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import AllCars from "./components/AllCars";
-import { Login, Signup } from "./components/AuthForm";
-import Home from "./components/Home";
-import { me } from "./store";
-import SingleCarView from "./components/SingleCarView";
-import Registration from "./components/Registration";
+import React, {Component, Fragment} from 'react'
+import {connect} from 'react-redux'
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+import AllCars from './components/AllCars';
+import { Login, Signup } from './components/AuthForm';
+import Home from './components/Home';
+import {me} from './store'
+import SingleCarView from './components/SingleCarView';
+import Registration from './components/Registration';
+import AllUsers from './components/AllUsers';
 import SingleUserView from "./components/SingleUserView";
 
 /**
@@ -35,7 +36,9 @@ class Routes extends Component {
             <Route path="/signup" component={Registration} />
             <Route exact path="/cars" component={AllCars} />
             <Route exact path="/cars/:id" component={SingleCarView} />
+            <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
+
           </Switch>
         )}
       </div>

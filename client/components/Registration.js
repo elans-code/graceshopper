@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createUser } from "../store/users";
+import { createUser } from "../store/allUsersStore";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,8 @@ class Registration extends Component {
     this.state = {
       name: "",
       password: "",
-      email: ""
+      email: "",
+      dateOfBirth: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,12 +28,13 @@ class Registration extends Component {
     this.setState({
       name: "",
       password: "",
-      email: ""
+      email: "",
+      dateOfBirth: "",
     })
   }
 
   render() {
-    const { name, password, email } = this.state;
+    const { name, password, email, dateOfBirth } = this.state;
     const { handleSubmit } = this;
 
     return (
@@ -50,6 +52,9 @@ class Registration extends Component {
 
         <label htmlFor="email">Email:</label>
         <input name="email" value={email} onChange={this.handleChange} />
+
+        <label htmlFor="dateOfBirth">Date of Birth:</label>
+        <input name="dateOfBirth" value={dateOfBirth} onChange={this.handleChange} />
 
         <button type="submit">Submit</button>
         <Link to="/">Cancel</Link>
