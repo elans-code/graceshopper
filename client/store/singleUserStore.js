@@ -22,7 +22,7 @@ export const editUser = (user) => {
       await Axios.put(`/api/users/update/${user.id}`, user);
       const { data: userData } = await Axios.get(`/api/users/${user.id}`);
       dispatch(_setSingleUser(userData))
-      history.push(`/user/modify/${user.id}`)
+      // history.push(`/user/modify/${user.id}`)
     } catch (error) {
       // next(error)
       console.log(error)
