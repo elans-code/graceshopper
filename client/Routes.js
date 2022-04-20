@@ -10,6 +10,7 @@ import Registration from './components/Registration';
 import AllUsers from './components/AllUsers';
 import SingleUserView from "./components/SingleUserView";
 import ModifyUser from './components/ModifyUser';
+import Cart from './components/Cart';
 
 /**
  * COMPONENT
@@ -39,6 +40,7 @@ class Routes extends Component {
             <Route exact path="/cars/:id" component={SingleCarView} />
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
+            <Route exact path="/cart" component={Cart} />
 
 
             <Route exact path="/user/modify/:id" component={ModifyUser}/>
