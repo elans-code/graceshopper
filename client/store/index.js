@@ -5,7 +5,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import carsReducer from './allCarsStore'
 import singleCarReducer from './singleCarStore'
-import userReducer from './users'
+import userReducer from './allUsersStore'
 import singleUserReducer from './singleUserStore'
 
 const reducer = combineReducers({
