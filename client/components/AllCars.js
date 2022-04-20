@@ -30,7 +30,6 @@ class AllCars extends React.Component {
                   <div>
                     <img className="all-cars-img" src={car.imageUrl} width="250" height="250" />
                     <p>{car.make} {car.model} ({car.year})</p>
-                    {/* look into way to add thousand separator comma */}
                     <p>{car.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
                   </div>
                     <div>
