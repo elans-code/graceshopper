@@ -9,6 +9,7 @@ import SingleCarView from './components/SingleCarView';
 import Registration from './components/Registration';
 import AllUsers from './components/AllUsers';
 import SingleUserView from "./components/SingleUserView";
+import ModifyUser from './components/ModifyUser';
 
 /**
  * COMPONENT
@@ -39,6 +40,8 @@ class Routes extends Component {
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
 
+
+            <Route exact path="/user/modify/:id" component={ModifyUser}/>
           </Switch>
         )}
       </div>

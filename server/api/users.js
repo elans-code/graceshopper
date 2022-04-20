@@ -21,6 +21,28 @@ module.exports = router;
 //   }
 // });
 
+router.put('/update/:id', async (req, res, next) => {
+  try {
+      await User.update(req.body, {
+          where: {
+              id: req.params.id,
+          }
+      })
+      res.sendStatus(200);
+  } catch (error) {
+      next(error)
+  }
+})
+
+router.get("/:id", async (req, res, next) => {
+  try {
+    const singleUser = await User.findByPk(req.params.id);
+    res.json(singleUser);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post('/', async (req, res, next) => {
   try {
     res.status(201).send(await User.create(req.body));

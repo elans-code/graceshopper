@@ -17,7 +17,6 @@ const _createUser = (user) => {
   };
 };
 
-
 export const createUser = (user, history) => {
   return async (dispatch) => {
     const { data: created } = await Axios.post("/api/users", user);

@@ -5,13 +5,15 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import carsReducer from './allCarsStore'
 import singleCarReducer from './singleCarStore'
-import userReducer from './allUsersStore'
+import userReducer from './users'
+import singleUserReducer from './singleUserStore'
 
 const reducer = combineReducers({
    auth,
    cars: carsReducer,
    cardata: singleCarReducer,
-   users: userReducer,
+   user: userReducer,
+   userData: singleUserReducer,
    })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
