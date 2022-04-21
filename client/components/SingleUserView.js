@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchUser } from "../store/singleUserStore";
+import { removeUser } from "../store/allUsersStore";
 
 class SingleUserView extends React.Component {
   componentDidMount() {
@@ -18,7 +19,16 @@ class SingleUserView extends React.Component {
             <h2>{user.email}</h2>
             <h3>{user.dateOfBirth}</h3>
             <Link to={`/user/modify/${user.id}`}>Modify {user.name}</Link>
+<<<<<<< HEAD
             <Link to={`/orders/${user.id}`}>Order History</Link>
+=======
+            <button
+              onClick={() => this.props.deleteUserData(user.id)}
+              type="submit"
+            >
+              Remove
+            </button>
+>>>>>>> 6708eb0903878cd5132ea1a6cdecfb9249c7a329
           </div>
         ) : (
           "There is no user data"
@@ -34,9 +44,10 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     fetchUserData: (id) => dispatch(fetchUser(id)),
+    deleteUserData: (id) => dispatch(removeUser(id, history)),
   };
 };
 

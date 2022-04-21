@@ -1,17 +1,22 @@
-import React, {Component, Fragment} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import AllCars from './components/AllCars';
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
-import {me} from './store'
-import SingleCarView from './components/SingleCarView';
-import Registration from './components/Registration';
-import AllUsers from './components/AllUsers';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import AllCars from "./components/AllCars";
+import { Login, Signup } from "./components/AuthForm";
+import Home from "./components/Home";
+import { me } from "./store";
+import SingleCarView from "./components/SingleCarView";
+import Registration from "./components/Registration";
+import AllUsers from "./components/AllUsers";
 import SingleUserView from "./components/SingleUserView";
+<<<<<<< HEAD
 import ModifyUser from './components/ModifyUser';
 import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory';
+=======
+import ModifyUser from "./components/ModifyUser";
+import Cart from "./components/Cart";
+>>>>>>> 6708eb0903878cd5132ea1a6cdecfb9249c7a329
 
 /**
  * COMPONENT
@@ -27,9 +32,12 @@ class Routes extends Component {
     return (
       <div>
         {isLoggedIn ? (
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6708eb0903878cd5132ea1a6cdecfb9249c7a329
           <Switch>
-            <Route path="/home" component={Home} />
+            <Route path="/home" component={AllCars} />
             <Route exact path="/cars" component={AllCars} />
             <Route exact path="/cars/:id" component={SingleCarView} />
             <Route exact path="/users" component={AllUsers} />
@@ -39,10 +47,10 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
+            <Route exact path="/" component={AllCars} />
+            <Route exact path="/login" component={Login} />
             {/* <Route path="/signup" component={Signup} /> */}
-            <Route path="/signup" component={Registration} />
+            <Route exact path="/signup" component={Registration} />
             <Route exact path="/cars" component={AllCars} />
             <Route exact path="/cars/:id" component={SingleCarView} />
             <Route exact path="/users" component={AllUsers} />
@@ -50,8 +58,7 @@ class Routes extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/orders" component={OrderHistory} />
 
-
-            <Route exact path="/user/modify/:id" component={ModifyUser}/>
+            <Route exact path="/user/modify/:id" component={ModifyUser} />
           </Switch>
         )}
       </div>

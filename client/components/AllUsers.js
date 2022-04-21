@@ -1,35 +1,39 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchUsers} from "../store/allUsersStore";
-import { Link } from 'react-router-dom'
-
+import { fetchUsers, removeUser } from "../store/allUsersStore";
+import { Link } from "react-router-dom";
 
 export class AllUsers extends React.Component {
   constructor() {
     super();
   }
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchUsers();
   }
   render() {
-    return  (
+    return (
       <div className="container">
         <div></div>
-      {this.props.users.map((user) => {
-        return (
-          <div className="user" key={user.id}>
-        <Link to ={`/users/${user.id}`}key={user.id}>
-        <div key={user.id}>
-          <div className="name"> UserName: {user.name}
-        </div>
-        </div>
-        </Link>
-          </div>
-        )
-      })}
+        {this.props.users.map((user) => {
+          return (
+            <div className="user" key={user.id}>
+              <Link to={`/users/${user.id}`} key={user.id}>
+                <div key={user.id}>
+                  <h1 className="name">{user.name}</h1>
+                  <h2>{user.email}</h2>
+                </div>
+              </Link>
+              <button
+                onClick={() => this.props.removedUser(user.id)}
+                type="submit"
+              >
+                Remove
+              </button>
+            </div>
+          );
+        })}
       </div>
-
-    )
+    );
   }
 }
 
@@ -39,12 +43,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-
-
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     fetchUsers: () => dispatch(fetchUsers()),
-
+    removedUser: (id) => dispatch(removeUser(id, history)),
   };
 };
 
