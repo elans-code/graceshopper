@@ -40,10 +40,10 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     fetchUserData: (id) => dispatch(fetchUser(id)),
-    deleteUserData: (id) => dispatch(removeUser(id)),
+    deleteUserData: (id) => dispatch(removeUser(id, history)),
   };
 };
 

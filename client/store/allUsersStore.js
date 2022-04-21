@@ -45,11 +45,14 @@ export const fetchUsers = () => {
   };
 };
 
-export const removeUser = (id) => {
+export const removeUser = (id, history) => {
   return async (dispatch) => {
     try {
-      const { data } = Axios.delete(`/api/users/${id}`);
+      const { data } = await Axios.delete(`/api/users/${id}`);
       dispatch(deleteUser(data));
+      //const { newData } = await Axios.get(`/api/users`);
+      //dispatch(setUsers(newData));
+      history.push("/users");
     } catch (err) {}
   };
 };
@@ -62,7 +65,9 @@ export default function userReducer(state = initialState, action) {
     case CREATE_USER:
       return [...state, action.user];
     case DELETE_USER:
-      return state.filter((user) => user.id !== action.user.id);
+      return state.filter((user) => {
+        return user.id !== action.user.id;
+      });
     default:
       return state;
   }
