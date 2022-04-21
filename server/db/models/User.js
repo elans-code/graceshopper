@@ -37,6 +37,10 @@ const User = db.define("user", {
       notEmpty: true,
     },
   },
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  }
 });
 
 module.exports = User;
