@@ -21,18 +21,18 @@ module.exports = router;
 //   }
 // });
 
-router.put('/update/:id', async (req, res, next) => {
+router.put("/update/:id", async (req, res, next) => {
   try {
-      await User.update(req.body, {
-          where: {
-              id: req.params.id,
-          }
-      })
-      res.sendStatus(200);
+    await User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.sendStatus(200);
   } catch (error) {
-      next(error)
+    next(error);
   }
-})
+});
 
 router.get("/:id", async (req, res, next) => {
   try {
@@ -43,7 +43,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await User.create(req.body));
   } catch (error) {
@@ -51,11 +51,11 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    let users = await User.findAll()
-    res.json(users)
+    let users = await User.findAll();
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
