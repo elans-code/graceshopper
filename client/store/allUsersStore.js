@@ -1,18 +1,26 @@
 import Axios from "axios";
 
-const SET_USERS = 'SET_USERS'
-const CREATE_USER = 'CREATE_USER'
+const SET_USERS = "SET_USERS";
+const CREATE_USER = "CREATE_USER";
+const DELETE_USER = "DELETE_USER";
 
 export const setUsers = (users) => {
   return {
     type: SET_USERS,
-    users
-  }
+    users,
+  };
 };
 
 const _createUser = (user) => {
   return {
     type: CREATE_USER,
+    user,
+  };
+};
+
+const deleteUser = (user) => {
+  return {
+    type: DELETE_USER,
     user,
   };
 };
@@ -28,23 +36,34 @@ export const createUser = (user, history) => {
 export const fetchUsers = () => {
   return async (dispatch) => {
     try {
-      const response = await Axios.get('/api/users');
+      const response = await Axios.get("/api/users");
       const data = response.data;
-      dispatch(setUsers(data))
+      dispatch(setUsers(data));
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 };
 
-const initialState = []
+export const removeUser = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = Axios.delete(`/api/users/${id}`);
+      dispatch(deleteUser(data));
+    } catch (err) {}
+  };
+};
+
+const initialState = [];
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case SET_USERS:
-      return action.users
-      case CREATE_USER:
-        return [...state, action.user];
+      return action.users;
+    case CREATE_USER:
+      return [...state, action.user];
+    case DELETE_USER:
+      return state.filter((user) => user.id !== action.user.id);
     default:
-      return state
-}}
-
+      return state;
+  }
+}
