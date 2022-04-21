@@ -45,16 +45,16 @@ class Registration extends Component {
       </span>
       <form id="addUser-form" onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
-        <input name="name" value={name} onChange={this.handleChange} />
+        <input name="name" type="text" value={name} onChange={this.handleChange} />
 
         <label htmlFor="password">Password:</label>
-        <input name="password" value={password} onChange={this.handleChange} />
+        <input name="password" type="password"value={password} onChange={this.handleChange} />
 
         <label htmlFor="email">Email:</label>
-        <input name="email" value={email} onChange={this.handleChange} />
+        <input name="email" type="email" value={email} onChange={this.handleChange} />
 
         <label htmlFor="dateOfBirth">Date of Birth:</label>
-        <input name="dateOfBirth" value={dateOfBirth} onChange={this.handleChange} />
+        <input name="dateOfBirth" type="date" value={dateOfBirth} onChange={this.handleChange} />
 
         <button type="submit">Submit</button>
         <Link to="/">Cancel</Link>
