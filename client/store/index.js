@@ -7,6 +7,7 @@ import carsReducer from './allCarsStore'
 import singleCarReducer from './singleCarStore'
 import userReducer from './allUsersStore'
 import singleUserReducer from './singleUserStore'
+import  orderReducer  from './orderStore'
 
 const reducer = combineReducers({
    auth,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
    cardata: singleCarReducer,
    users: userReducer,
    userData: singleUserReducer,
+   orders: orderReducer,
    })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

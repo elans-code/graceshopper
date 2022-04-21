@@ -2,6 +2,7 @@ const { green, red } = require("chalk");
 const { db } = require("./server/db");
 const Car = require("./server/db/models/Car");
 const User = require("./server/db/models/User");
+const Order = require("./server/db/models/Order")
 
 const cars = [
   {
@@ -43,6 +44,13 @@ const users = [
   },
 ];
 
+const orders = [
+  {
+    item: "CAR",
+    price: "2500",
+  },
+]
+
 const seed = async () => {
   try {
     await db.sync({ force: true });
@@ -56,6 +64,11 @@ const seed = async () => {
       users.map((user) => {
         return User.create(user);
       })
+      );
+      await Promise.all(
+        orders.map((order) => {
+          return Order.create(order);
+        })
     );
 
     console.log(green("Seeding success!"));

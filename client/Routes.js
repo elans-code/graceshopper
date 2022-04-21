@@ -11,6 +11,7 @@ import AllUsers from './components/AllUsers';
 import SingleUserView from "./components/SingleUserView";
 import ModifyUser from './components/ModifyUser';
 import Cart from './components/Cart';
+import OrderHistory from './components/OrderHistory';
 
 /**
  * COMPONENT
@@ -26,7 +27,7 @@ class Routes extends Component {
     return (
       <div>
         {isLoggedIn ? (
-          
+
           <Switch>
             <Route path="/home" component={Home} />
             <Route exact path="/cars" component={AllCars} />
@@ -34,6 +35,7 @@ class Routes extends Component {
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/orders" component={OrderHistory} />
           </Switch>
         ) : (
           <Switch>
@@ -46,6 +48,7 @@ class Routes extends Component {
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/orders" component={OrderHistory} />
 
 
             <Route exact path="/user/modify/:id" component={ModifyUser}/>

@@ -17,7 +17,8 @@ class SingleUserView extends React.Component {
             <h1>{user.name}</h1>
             <h2>{user.email}</h2>
             <h3>{user.dateOfBirth}</h3>
-            <Link to={`/user/modify/${user.id}`}>Modify {user.name}</Link> 
+            <Link to={`/user/modify/${user.id}`}>Modify {user.name}</Link>
+            <Link to={`/orders/${user.id}`}>Order History</Link>
           </div>
         ) : (
           "There is no user data"
