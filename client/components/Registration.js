@@ -38,27 +38,28 @@ class Registration extends Component {
     const { handleSubmit } = this;
 
     return (
+      <div className="flex justify-center">
+        <div className="addUser flex flex-col justify-center">
+          <div>
+            <div className="actionHeader"> Register User</div>
+          </div>
+          <form id="addUser-form" onSubmit={handleSubmit}>
+            <label htmlFor="name">Name:</label>
+            <input name="name" type="text" value={name} onChange={this.handleChange} />
 
-      <div className="addUser">
-      <span>
-      <div className="actionHeader"> Register User</div>
-      </span>
-      <form id="addUser-form" onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input name="name" value={name} onChange={this.handleChange} />
+            <label htmlFor="password">Password:</label>
+            <input name="password" type="password"value={password} onChange={this.handleChange} />
 
-        <label htmlFor="password">Password:</label>
-        <input name="password" value={password} onChange={this.handleChange} />
+            <label htmlFor="email">Email:</label>
+            <input name="email" type="email" value={email} onChange={this.handleChange} />
 
-        <label htmlFor="email">Email:</label>
-        <input name="email" value={email} onChange={this.handleChange} />
-
-        <label htmlFor="dateOfBirth">Date of Birth:</label>
-        <input name="dateOfBirth" value={dateOfBirth} onChange={this.handleChange} />
-
-        <button type="submit">Submit</button>
-        <Link to="/">Cancel</Link>
-      </form>
+            <label htmlFor="dateOfBirth">Date of Birth:</label>
+            <input name="dateOfBirth" type="date" value={dateOfBirth} onChange={this.handleChange} />
+            
+            <button type="submit">Submit</button>
+            <Link to="/">Cancel</Link>
+          </form>
+        </div>
       </div>
     );
   }
