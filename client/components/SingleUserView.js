@@ -14,7 +14,6 @@ class SingleUserView extends React.Component {
         {user ? (
           <div>
             <h1>{user.name}</h1>
-            <img src={cardata.imageUrl} />
             <h2>{user.email}</h2>
             <h3>{user.dateOfBirth}</h3>
           </div>
@@ -28,7 +27,7 @@ class SingleUserView extends React.Component {
 
 const mapState = (state) => {
   return {
-    userData: state.singleUser,
+    userData: state.userData,
   };
 };
 
