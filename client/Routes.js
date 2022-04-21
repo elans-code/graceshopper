@@ -27,7 +27,7 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
+            <Route path="/home" component={AllCars} />
             <Route exact path="/cars" component={AllCars} />
             <Route exact path="/cars/:id" component={SingleCarView} />
             <Route exact path="/users" component={AllUsers} />
