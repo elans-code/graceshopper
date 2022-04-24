@@ -43,10 +43,11 @@ export const fetchCars = () => {
     }
 }
 
-export const createCar = (car) => {
+export const createCar = (car, history) => {
   return async (dispatch) => {
     const { data } = await axios.post("/api/cars", car);
     dispatch(_createCar(data));
+    history.push("./")
   };
 };
 
