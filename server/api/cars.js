@@ -14,6 +14,21 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+
+router.put("/update/:id", async (req, res, next) => {
+  try {
+    await Car.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 // Get single car
 router.get("/:id", async (req, res, next) => {
   try {

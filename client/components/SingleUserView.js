@@ -19,16 +19,13 @@ class SingleUserView extends React.Component {
             <h2>{user.email}</h2>
             <h3>{user.dateOfBirth}</h3>
             <Link to={`/user/modify/${user.id}`}>Modify {user.name}</Link>
-<<<<<<< HEAD
             <Link to={`/orders/${user.id}`}>Order History</Link>
-=======
             <button
               onClick={() => this.props.deleteUserData(user.id)}
               type="submit"
             >
               Remove
             </button>
->>>>>>> 6708eb0903878cd5132ea1a6cdecfb9249c7a329
           </div>
         ) : (
           "There is no user data"
