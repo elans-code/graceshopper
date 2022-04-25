@@ -4,28 +4,25 @@ const {
 } = require("../db");
 module.exports = router;
 
-async function requireToken(req, res, next) {
+const requireToken = async (req, res, next) => {
   try {
+    console.log(req.headers.authorization);
     const userData = await User.findByToken(req.headers.authorization);
     req.user = userData;
     next();
   } catch (error) {
     next(error);
   }
-}
+};
 
 router.put("/update/:id", requireToken, async (req, res, next) => {
   try {
-    if (req.user.admin) {
-      await User.update(req.body, {
-        where: {
-          id: req.params.id,
-        },
-      });
-      res.sendStatus(200);
-    } else {
-      return res.status(403).send("You shll not pass!");
-    }
+    await User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.sendStatus(200);
   } catch (error) {
     next(error);
   }
@@ -33,7 +30,10 @@ router.put("/update/:id", requireToken, async (req, res, next) => {
 
 router.get("/:id", requireToken, async (req, res, next) => {
   try {
-    const singleUser = await User.findByPk(req.params.id, {
+    const singleUser = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
       attributes: ["name", "email", "dateOfBirth"],
     });
     res.json(singleUser);

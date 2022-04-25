@@ -2,8 +2,8 @@ const { green, red } = require("chalk");
 const { db } = require("./server/db");
 const Car = require("./server/db/models/Car");
 const User = require("./server/db/models/User");
-const Order = require("./server/db/models/Order")
-const Cart = require("./server/db/models/Cart")
+const Order = require("./server/db/models/Order");
+const Cart = require("./server/db/models/Cart");
 
 const cars = [
   {
@@ -36,6 +36,7 @@ const users = [
     email: "bsmith@gmail.com",
     password: "123456789",
     dateOfBirth: "01/01/1950",
+    admin: true,
   },
   {
     name: "Mary",
@@ -54,7 +55,7 @@ const orders = [
     item: "OTHER CAR PURCHASED",
     price: "100",
   },
-]
+];
 
 const carts = [
   {
@@ -65,7 +66,7 @@ const carts = [
     item: "OTHER CAR",
     price: "100",
   },
-]
+];
 
 const seed = async () => {
   try {
@@ -80,16 +81,16 @@ const seed = async () => {
       users.map((user) => {
         return User.create(user);
       })
-      );
-      await Promise.all(
-        carts.map((cart) => {
-          return Cart.create(cart);
-        })
-        );
-      await Promise.all(
-        orders.map((order) => {
-          return Order.create(order);
-        })
+    );
+    await Promise.all(
+      carts.map((cart) => {
+        return Cart.create(cart);
+      })
+    );
+    await Promise.all(
+      orders.map((order) => {
+        return Order.create(order);
+      })
     );
 
     console.log(green("Seeding success!"));
