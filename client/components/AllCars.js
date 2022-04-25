@@ -14,7 +14,6 @@ class AllCars extends React.Component {
   }
 
   handleClick(car) {
-    console.log(car);
     this.props.addedToCart(car, this.props.cart);
     //this.props.updateToCart(this.props.cart);
   }

@@ -36,8 +36,8 @@ export const updateCart = (cart) => {
 
 export const addToCart = (item, cart) => {
   return async (dispatch) => {
-    const { data } = await axios.post(`/api/cart/${cart.userId}`, item);
-    cart.items = [...cart.items, item];
+    cart = [...cart, item];
+    // const { data } = await axios.post(`/api/cart/${cart.userId}`, item);   
     dispatch(_setCart(cart));
   };
 };
