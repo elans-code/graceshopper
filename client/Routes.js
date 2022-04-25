@@ -9,14 +9,9 @@ import SingleCarView from "./components/SingleCarView";
 import Registration from "./components/Registration";
 import AllUsers from "./components/AllUsers";
 import SingleUserView from "./components/SingleUserView";
-<<<<<<< HEAD
 import ModifyUser from './components/ModifyUser';
 import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory';
-=======
-import ModifyUser from "./components/ModifyUser";
-import Cart from "./components/Cart";
->>>>>>> 6708eb0903878cd5132ea1a6cdecfb9249c7a329
 
 /**
  * COMPONENT
@@ -32,10 +27,6 @@ class Routes extends Component {
     return (
       <div>
         {isLoggedIn ? (
-<<<<<<< HEAD
-
-=======
->>>>>>> 6708eb0903878cd5132ea1a6cdecfb9249c7a329
           <Switch>
             <Route path="/home" component={AllCars} />
             <Route exact path="/cars" component={AllCars} />
