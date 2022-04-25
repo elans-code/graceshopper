@@ -3,6 +3,7 @@ const { db } = require("./server/db");
 const Car = require("./server/db/models/Car");
 const User = require("./server/db/models/User");
 const Order = require("./server/db/models/Order")
+const Cart = require("./server/db/models/Cart")
 
 const cars = [
   {
@@ -46,8 +47,23 @@ const users = [
 
 const orders = [
   {
+    item: "CAR PURCHASED",
+    price: "2500",
+  },
+  {
+    item: "OTHER CAR PURCHASED",
+    price: "100",
+  },
+]
+
+const carts = [
+  {
     item: "CAR",
     price: "2500",
+  },
+  {
+    item: "OTHER CAR",
+    price: "100",
   },
 ]
 
@@ -65,6 +81,11 @@ const seed = async () => {
         return User.create(user);
       })
       );
+      await Promise.all(
+        carts.map((cart) => {
+          return Cart.create(cart);
+        })
+        );
       await Promise.all(
         orders.map((order) => {
           return Order.create(order);

@@ -1,15 +1,24 @@
 const router = require("express").Router();
 const {
-  models: { User },
+  models: { Cart },
 } = require("../db");
 module.exports = router;
 
 // Get all cars
-router.get("/", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const users = await Car.findAll();
-    res.json(users);
+    const items = await Cart.findByPk(req.params.id);
+    res.json(items);
   } catch (error) {
     next(error);
   }
 });
+
+// router.get("/:id", async (req, res, next) => {
+//   try {
+//     const singleUser = await User.findByPk(req.params.id);
+//     res.json(singleUser);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
