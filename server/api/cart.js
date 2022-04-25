@@ -4,7 +4,7 @@ const {
 } = require("../db");
 module.exports = router;
 
-// Get all cars
+
 router.get("/:id", async (req, res, next) => {
   try {
     const items = await Cart.findByPk(req.params.id);
