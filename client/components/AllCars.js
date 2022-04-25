@@ -5,13 +5,18 @@ import { updateCart, addToCart } from "../store/cartStore";
 import { Link } from "react-router-dom";
 
 class AllCars extends React.Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
   componentDidMount() {
     this.props.getCars();
   }
 
-  addToCart(car, cart) {
-    this.props.addedToCar(car, cart);
-    this.props.updateToCart(cart);
+  handleClick(car) {
+    console.log(car);
+    this.props.addedToCart(car, this.props.cart);
+    //this.props.updateToCart(this.props.cart);
   }
 
   render() {
@@ -48,14 +53,10 @@ class AllCars extends React.Component {
                   <button
                     className="all-cars-btn"
                     type="submit"
-                    onClick={() => this.addToCart(car, this.props.cart)}
+                    onClick={() => this.handleClick(car)}
                   >
                     Add to cart
                   </button>
-                  {/* do we want the edit on this page? maybe just on the singlecar view? */}
-                  {/* <div>
-                       <Link to="cars/edit" >Edit</Link>
-                     </div> */}
                 </div>
               </div>
             );
@@ -76,7 +77,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCars: () => dispatch(fetchCars()),
-    addedToCar: (item, cart) => dispatch(addToCart(item, cart)),
+    addedToCart: (item, cart) => dispatch(addToCart(item, cart)),
     updateToCart: (cart) => dispatch(updateCart(cart)),
   };
 };
