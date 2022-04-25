@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import { addToOrders } from '../store/orderStore'
 /**
  * COMPONENT
  */
@@ -17,6 +17,7 @@ class Cart extends React.Component{
         this.handleQuantity = this.handleQuantity.bind(this)
     }
     handleCheckout(cartdata){
+        this.props.addToOrders(cartdata)
         //checkout with payment processor
     }
     handleRemoveItem(itemId){
@@ -38,8 +39,8 @@ class Cart extends React.Component{
             <div>
                 <div><h1>{username ? username : "guest"}'s cart</h1></div>
                 <div>
-                { 
-                    cartdata ? 
+                {
+                    cartdata ?
                     cartdata.map
                     ((item) =>
                         {
@@ -75,9 +76,10 @@ const mapState = state => {
     username: state.auth.username
   }
 }
-const mapDispatch = (dispatch) =>{
+const mapDispatch = (dispatch, { history }) =>{
     return{
-        fetchCartData: (username) => { /*dispatch( add thunk for fetch cart data )*/ }
+        fetchCartData: (username) => { /*dispatch( add thunk for fetch cart data )*/ },
+        addToOrders:(order) => dispatch(addToOrders(order, history))
     }
 }
 
