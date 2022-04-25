@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchCars } from "../store/allCarsStore";
-import { updateCart, addToCart } from "../store/cartStore";
+import { updateCart, addToCart, saveCartToLocal, fetchCart } from "../store/cartStore";
 import { Link } from "react-router-dom";
 
 class AllCars extends React.Component {
@@ -70,6 +70,7 @@ const mapStateToProps = (state) => {
   return {
     cars: state.cars,
     cart: state.cart,
+    isLoggedIn: !!state.auth.id
   };
 };
 
@@ -77,7 +78,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getCars: () => dispatch(fetchCars()),
     addedToCart: (item, cart) => dispatch(addToCart(item, cart)),
-    updateToCart: (cart) => dispatch(updateCart(cart)),
   };
 };
 

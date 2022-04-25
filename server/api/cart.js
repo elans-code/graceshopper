@@ -21,18 +21,23 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/:id", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    if (req.params.id) {
-      const createCart = await Cart.create(req.body, {
-        where: {
-          userId: req.params.id,
-        },
-      });
-      res.json(createCart);
-    } else {
-      res.send(window.localStorage.setItem("Cart", req.body));
-    }
+    // const doesCartExist = await Cart.findOne({
+    //   where: {
+    //     userId: req.params.id
+    //   }})
+    console.log(req.params.id)
+    // if (req.params.id) {
+    //   const createCart = await Cart.create(req.body, {
+    //     where: {
+    //       userId: req.params.id,
+    //     },
+    //   });
+    //   res.json(createCart);
+    // } else {
+    //   res.send(window.localStorage.setItem("Cart", req.body));
+    // }
   } catch (error) {
     next(error);
   }

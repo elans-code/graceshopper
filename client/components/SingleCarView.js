@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { fetchCar } from '../store/singleCarStore'
 import { Link } from 'react-router-dom'
+import {addToCart} from '../store/cartStore'
 
 /**
  * COMPONENT
@@ -15,7 +16,7 @@ class SingleCarView extends React.Component{
         this.props.fetchCarData(this.props.match.params.id)
     }
     handleCart(cardata){
-        //add car to cart
+        this.props.addedToCart(cardata, this.props.cart)
     }
     render(){
         const cardata = this.props.cardata
@@ -48,12 +49,14 @@ class SingleCarView extends React.Component{
 const mapState = state => {
   return {
     username: state.auth.username,
-    cardata: state.cardata
+    cardata: state.cardata,
+    cart: state.cart,
   }
 }
 const mapDispatch = (dispatch) =>{
     return{
-        fetchCarData: (id) => { dispatch(fetchCar(id)) }
+        fetchCarData: (id) => { dispatch(fetchCar(id)) },
+        addedToCart: (item, cart) => dispatch(addToCart(item, cart)),
     }
 }
 

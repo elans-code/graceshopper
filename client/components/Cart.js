@@ -31,7 +31,7 @@ class Cart extends React.Component{
     }
     render(){
         const {username} = this.props
-        const cartdata = this.props.cartdata
+        const cartdata = this.props.cart
         let cartTotal = 0
         let numberOfItems = 0
         return (
@@ -43,14 +43,14 @@ class Cart extends React.Component{
                     cartdata.map
                     ((item) =>
                         {
-                            cartTotal += item.price
+                            cartTotal += item.price * item.quantity
                             numberOfItems += item.quantity
                             return (
                             <div key={item.id}>
                                 <div><h2>{item.name}</h2></div>
                                 <div><img src={item.imageUrl}/></div>
                                 <div><h2>Price: {item.price}</h2></div>
-                                <div><h2>Quantity: </h2><input type='number' name={item.id} onChange={this.handleQuantity}/></div>
+                                <div><h2>Quantity: </h2><input type='number' value={item.quantity} name={item.id} onChange={this.handleQuantity}/></div>
                                 <div><button type='button' onClick={()=>{this.handleRemoveItem(item.id)}}>Remove Item</button></div>
                             </div>
                             )
@@ -72,7 +72,8 @@ class Cart extends React.Component{
  */
 const mapState = state => {
   return {
-    username: state.auth.username
+    username: state.auth.username,
+    cart: state.cart
   }
 }
 const mapDispatch = (dispatch) =>{
