@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createCar } from "../store/allCarsStore";
+import { Link } from "react-router-dom";
 
 class CreateCar extends React.Component {
   constructor() {
@@ -33,49 +34,47 @@ class CreateCar extends React.Component {
   render() {
     const { make, model, year, price, color, quantity, description } = this.state;
     return (
-      <div>
+      
+      <div className="flex justify-center">
         <form onSubmit={this.handleSubmit}>
-          <div>
+          
             <label htmlFor="make"> Car Make:</label>
             <input name="make" onChange={this.handleChange} value={make} />
-          </div>
-          <div>
+
             <label htmlFor="model">Car Model:</label>
             <input name="model" onChange={this.handleChange} value={model} />
-          </div>
-          <div>
+          
+          
             <label htmlFor="year">Car Year:</label>
             <input name="year" onChange={this.handleChange} value={year} />
-          </div>
-          <div>
+          
+          
             <label htmlFor="price">Car Price:</label>
             <input name="price" onChange={this.handleChange} value={price} />
-          </div>
-          <div>
+          
+          
             <label htmlFor="color">Car Color:</label>
             <input name="color" onChange={this.handleChange} value={color} />
-          </div>
-          <div>
+          
+          
             <label htmlFor="quantity">Car Quantity:</label>
             <input name="quantity" onChange={this.handleChange} value={quantity} />
-          </div>
-          <div>
+          
+          
             <label htmlFor="description">Car description:</label>
             <input name="description" onChange={this.handleChange} value={description} />
-          </div>
-          <div>
-            <button className="btn" type="submit">
-              Submit
-            </button>
-          </div>
+          
+          
+            <button className="btn" type="submit">Submit</button>
+            <Link to="/" >Cancel</Link>
         </form>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    createCar: (car) => dispatch(createCar(car)),
+const mapDispatchToProps = (dispatch, {history}) => ({
+    createCar: (car) => dispatch(createCar(car, history)),
   });
   
 export default connect(null, mapDispatchToProps)(CreateCar);

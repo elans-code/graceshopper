@@ -21,22 +21,22 @@ class EditCar extends React.Component {
 
   componentDidMount() {
     try {
-      this.props.fetchCar;
+      this.props.fetchCar(this.props.match.params.id);
     } catch (error) {
       console.error(error);
     }
   }
 
-  componentDidUpdate() {
-    if (prevProps.carData !== this.props.carData) {
-      this.setState({
-        make: this.props.carData.make || "",
-        model: this.props.carData.model || "",
-        year: this.props.carData.year || "",
-        price: this.props.carData.price || "",
-      });
-    }
-  }
+  // componentDidUpdate() {
+  //   if (prevProps.carData !== this.props.carData) {
+  //     this.setState({
+  //       make: this.props.carData.make || "",
+  //       model: this.props.carData.model || "",
+  //       year: this.props.carData.year || "",
+  //       price: this.props.carData.price || "",
+  //     });
+  //   }
+  // }
 
   handleChange(event) {
     this.setState({
@@ -46,7 +46,7 @@ class EditCar extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.updateCar({ ...this.props.carData, ...this.state });
+    // this.props.updateCar({ ...this.props.carData, ...this.state });
     this.props.updateSingleCar({ ...this.props.carData, ...this.state });
   }
 
@@ -55,22 +55,18 @@ class EditCar extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <div>
+          
             <label htmlFor="make"> Car Make:</label>
             <input name="make" onChange={this.handleChange} value={make} />
-          </div>
-          <div>
+          
             <label htmlFor="model">Car Model:</label>
             <input name="model" onChange={this.handleChange} value={model} />
-          </div>
-          <div>
+          
             <label htmlFor="year">Car Year:</label>
             <input name="year" onChange={this.handleChange} value={year} />
-          </div>
-          <div>
+          
             <label htmlFor="price">Car Year:</label>
             <input name="price" onChange={this.handleChange} value={price} />
-          </div>
           <div>
             <button className="btn" type="submit">
               Submit
@@ -88,9 +84,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, {history}) => ({
   fetchCar: (id) => dispatch(fetchCar(id)),
-  updateCar: (car) => dispatch(updateCar(car)),
+  // updateCar: (car) => dispatch(updateCar(car, history)),
   updateSingleCar: (car) => dispatch(updateSingleCar(car)),
 });
 

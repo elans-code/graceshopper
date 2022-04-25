@@ -29,8 +29,13 @@ export const fetchCar = (id) => {
 
 export const updateSingleCar = (car) => {
   return async (dispatch) => {
-    const {data} = await axios.put(`/api/cars/${car.id}`, car)
-    dispatch(_updateSingleCar(data))
+    try {
+    await axios.put(`/api/cars/update/${car.id}`, car)
+    const {data: carData} = await axios.get(`/api/cars/${car.id}`);
+    dispatch(_setSingleCar(carData))
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

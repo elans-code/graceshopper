@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchCars } from "../store/allCarsStore";
 import { Link } from "react-router-dom";
-import CreateCar from "./CreateCar";
 
 class AllCars extends React.Component {
   componentDidMount() {
@@ -17,15 +16,14 @@ class AllCars extends React.Component {
   render() {
     return (
       <div>
-      {/* if admin, then render the CreateCar component otherwise don't */}
-        {/* <div className="create-car">
-          <CreateCar />
-        </div> */}
+      {/* if admin, then render the link to CreateCar component otherwise don't */}
+        <div>
+        <Link to="cars/create">Add New Car</Link>
+        </div>
         <div >
           {this.props.cars.map((car) => {
             return (
               <div key={car.id} className="all-cars">
-                { console.log("car!!", car)}
                 <Link to={`/cars/${car.id}`}>
                   <div>
                     <img className="all-cars-img" src={car.imageUrl} width="250" height="250" />
@@ -34,6 +32,10 @@ class AllCars extends React.Component {
                   </div>
                     <div>
                      <button className="all-cars-btn" type="submit" onClick={()=> this.addToCart(car)} >Add to cart</button>
+                     {/* do we want the edit on this page? maybe just on the singlecar view? */}
+                     {/* <div>
+                       <Link to="cars/edit" >Edit</Link>
+                     </div> */}
                     </div>
                 </Link>
               </div>

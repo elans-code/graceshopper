@@ -12,7 +12,8 @@ import SingleUserView from "./components/SingleUserView";
 import ModifyUser from './components/ModifyUser';
 import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory';
-
+import CreateCar from "./components/CreateCar";
+import EditCar from "./components/EditCar";
 /**
  * COMPONENT
  */
@@ -43,12 +44,13 @@ class Routes extends Component {
             {/* <Route path="/signup" component={Signup} /> */}
             <Route exact path="/signup" component={Registration} />
             <Route exact path="/cars" component={AllCars} />
+            <Route exact path="/cars/create" component={CreateCar} />
+            <Route exact path="/cars/edit/:id" component={EditCar} />
             <Route exact path="/cars/:id" component={SingleCarView} />
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/orders" component={OrderHistory} />
-
             <Route exact path="/user/modify/:id" component={ModifyUser} />
           </Switch>
         )}

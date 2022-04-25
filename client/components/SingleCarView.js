@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { fetchCar } from '../store/singleCarStore'
+import { Link } from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -32,6 +33,7 @@ class SingleCarView extends React.Component{
                     <div><h2>Description: {cardata.description}</h2></div>
                     <div><h2>Stock: {cardata.quantity}</h2></div>
                     <div><button type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</button></div>
+                    <div><Link to={`/cars/edit/${cardata.id}`} >Edit</Link></div>
                 </div>)
                 : 'There is no car data'
             }
