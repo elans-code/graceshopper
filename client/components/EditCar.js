@@ -65,7 +65,7 @@ class EditCar extends React.Component {
             <label htmlFor="year">Car Year:</label>
             <input name="year" onChange={this.handleChange} value={year} />
           
-            <label htmlFor="price">Car Year:</label>
+            <label htmlFor="price">Car Price:</label>
             <input name="price" onChange={this.handleChange} value={price} />
           <div>
             <button className="btn" type="submit">
