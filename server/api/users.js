@@ -4,46 +4,45 @@ const {
 } = require("../db");
 module.exports = router;
 
-// async function requireToken(req, res, next) {
-//   try {
-//     const userData = await User.findByToken(req.headers.authorization);
-//     req.user = userData;
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// }
-// router.get("/", requireToken, async (req, res, next) => {
-//   try {
-//     res.send(req.user);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
-
-router.put("/update/:id", async (req, res, next) => {
+async function requireToken(req, res, next) {
   try {
-    await User.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.sendStatus(200);
+    const userData = await User.findByToken(req.headers.authorization);
+    req.user = userData;
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
+router.put("/update/:id", requireToken, async (req, res, next) => {
+  try {
+    if (req.user.admin) {
+      await User.update(req.body, {
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.sendStatus(200);
+    } else {
+      return res.status(403).send("You shll not pass!");
+    }
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", requireToken, async (req, res, next) => {
   try {
-    const singleUser = await User.findByPk(req.params.id);
+    const singleUser = await User.findByPk(req.params.id, {
+      attributes: ["name", "email", "dateOfBirth"],
+    });
     res.json(singleUser);
   } catch (err) {
     next(err);
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", requireToken, async (req, res, next) => {
   try {
     res.status(201).send(await User.create(req.body));
   } catch (error) {
@@ -51,20 +50,30 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/", async (req, res, next) => {
+router.get("/", requireToken, async (req, res, next) => {
   try {
-    let users = await User.findAll();
-    res.json(users);
+    if (req.user.admin) {
+      let users = await User.findAll({
+        attributes: ["name", "email", "dateOfBirth"],
+      });
+      res.json(users);
+    } else {
+      return res.status(403).send("You shll not pass!");
+    }
   } catch (err) {
     next(err);
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", requireToken, async (req, res, next) => {
   try {
-    const userToDelete = await User.findByPk(req.params.id);
-    await userToDelete.destroy();
-    res.send(userToDelete);
+    if (req.user.admin) {
+      const userToDelete = await User.findByPk(req.params.id);
+      await userToDelete.destroy();
+      res.send(userToDelete);
+    } else {
+      return res.status(403).send("You shll not pass!");
+    }
   } catch (error) {
     next(error);
   }
