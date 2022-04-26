@@ -28,11 +28,11 @@ export const fetchOrders = (id) => {
   }
 }
 
-export const addToOrders = (order, history) => {
+export const addToOrders = (order, userId, history) => {
   return async (dispatch) => {
-    const { data } = await axios.post(`/api/orders`, order);
+    const { data } = await axios.post(`/api/orders/${userId}`, order.item);
     dispatch(_addOrder(data));
-    history.push("./")
+    history.push('./checkout')
   };
 };
 

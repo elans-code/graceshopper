@@ -31,6 +31,7 @@ class AllCars extends React.Component {
     return (
       <div className="flex flex-col justify-center">
         {/* if admin, then render the link to CreateCar component otherwise don't */}
+        {console.log("yo!!!!", this.props)}
         {this.props.isAdmin ? (
           <div>
             <h2>ADMIN VIEW</h2>

@@ -18,14 +18,15 @@ class SingleUserView extends React.Component {
             <h1>{user.name}</h1>
             <h2>{user.email}</h2>
             <h3>{user.dateOfBirth}</h3>
-            <Link to={`/user/modify/${user.id}`}>Modify {user.name}</Link>
-            <Link to={`/orders/${user.id}`}>Order History</Link>
-            <button
+           <div> <Link to={`/user/modify/${user.id}`}>Modify {user.name}</Link></div>
+           <div><Link to={`/orders/${user.id}`}>Order History</Link></div>
+           <div> <button
               onClick={() => this.props.deleteUserData(user.id)}
               type="submit"
             >
               Remove
             </button>
+          </div>
           </div>
         ) : (
           "There is no user data"
