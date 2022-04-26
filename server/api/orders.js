@@ -22,3 +22,16 @@ router.get("/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+router.post("/:id", async (req, res, next) => {
+  try {
+      const createOrder = await Order.create(req.body, {
+        where: {
+          userId: req.params.id,
+        },
+      });
+    res.json(createOrder);
+  } catch (error) {
+    next(error);
+  }
+});
