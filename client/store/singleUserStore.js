@@ -1,5 +1,6 @@
 import Axios from "axios";
 
+const TOKEN = "token";
 const SET_SINGLE_USER = "SET_SINGLE_USER";
 
 const _setSingleUser = (userData) => {
@@ -11,18 +12,36 @@ const _setSingleUser = (userData) => {
 
 export const fetchUser = (id) => {
   return async (dispatch) => {
-    const { data: user } = await Axios.get(`/api/users/${id}`);
-    dispatch(_setSingleUser(user));
+    const token = window.localStorage.getItem(TOKEN);
+    if (token) {
+      const { data: user } = await Axios.get(`/api/users/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch(_setSingleUser(user));
+    }
   };
 };
 
 export const editUser = (user) => {
   return async (dispatch, history) => {
     try {
-      await Axios.put(`/api/users/update/${user.id}`, user);
-      const { data: userData } = await Axios.get(`/api/users/${user.id}`);
-      dispatch(_setSingleUser(userData));
-      // history.push(`/user/modify/${user.id}`)
+      const token = window.localStorage.getItem(TOKEN);
+      if (token) {
+        await Axios.put(`/api/users/update/${user.id}`, user, {
+          headers: {
+            authorization: token,
+          },
+        });
+        const { data: userData } = await Axios.get(`/api/users/${user.id}`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        dispatch(_setSingleUser(userData));
+        // history.push(`/user/modify/${user.id}`)
+      }
     } catch (error) {
       // next(error)
       console.log(error);

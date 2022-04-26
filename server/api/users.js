@@ -58,7 +58,7 @@ router.get("/", requireToken, async (req, res, next) => {
       });
       res.json(users);
     } else {
-      return res.status(403).send("You shll not pass!");
+      return res.status(403).send("You shall not pass!");
     }
   } catch (err) {
     next(err);
@@ -72,7 +72,7 @@ router.delete("/:id", requireToken, async (req, res, next) => {
       await userToDelete.destroy();
       res.send(userToDelete);
     } else {
-      return res.status(403).send("You shll not pass!");
+      return res.status(403).send("You shall not pass!");
     }
   } catch (error) {
     next(error);
