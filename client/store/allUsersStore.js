@@ -65,7 +65,11 @@ export const removeUser = (id, history) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       if (token) {
-        const { data } = await Axios.delete(`/api/users/${id}`);
+        console.log('id:',id)
+        const { data } = await Axios.delete(`/api/users/${id}`, {
+          headers: {
+            authorization: token,
+          }});
         dispatch(deleteUser(data));
         //const { newData } = await Axios.get(`/api/users`);
         //dispatch(setUsers(newData));

@@ -25,7 +25,7 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn, userId } = this.props;
+    const { isLoggedIn, userId, isAdmin } = this.props;
     // userId ? console.log(userId) : console.log('no userid')
     return (
       <div>
@@ -34,7 +34,6 @@ class Routes extends Component {
             <Route path="/home" component={AllCars} />
             <Route exact path="/cars" component={AllCars} />
             <Route exact path="/cars/:id" component={SingleCarView} />
-            <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/orders/:id" component={OrderHistory} />
@@ -42,6 +41,11 @@ class Routes extends Component {
             <Route exact path="/cars/modify/create" component={CreateCar} />
             <Route exact path="/cars/edit/:id" component={EditCar} />
             <Route exact path="/user/modify/:id" component={ModifyUser} />
+            {isAdmin ? 
+            (
+              <Route exact path="/users" component={AllUsers} />
+            )
+            : <></>}
 
           </Switch>
         ) : (
@@ -74,6 +78,7 @@ const mapState = (state) => {
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
     userId: state.auth.id,
+    isAdmin: state.auth.admin,
   };
 };
 

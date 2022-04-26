@@ -15,6 +15,7 @@ export class AllUsers extends React.Component {
       <div className="container">
         <div></div>
         {this.props.users.map((user) => {
+          console.log(user)
           return (
             <div className="user" key={user.id}>
               <Link to={`/users/${user.id}`} key={user.id}>
