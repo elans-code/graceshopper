@@ -28,7 +28,7 @@ class AllCars extends React.Component {
         <div>
           <Link to="cars/create">Add New Car</Link>
         </div>
-        <div>
+        <div className="flex flex-row flex-wrap">
           {this.props.cars.map((car) => {
             return (
               <div key={car.id} className="all-cars">

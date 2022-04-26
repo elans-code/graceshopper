@@ -4,44 +4,78 @@ const Car = require("./server/db/models/Car");
 const User = require("./server/db/models/User");
 const Order = require("./server/db/models/Order")
 const Cart = require("./server/db/models/Cart")
+const axios = require("axios")
+const {convert} = require('html-to-text')
 
-const cars = [
-  {
-    year: "2022",
-    make: "Toyota",
-    model: "Camry",
-    color: "black",
-    description: "good car",
-    price: "25395",
-    quantity: "2",
-    imageUrl:
-      "https://media-service.carmax.com/img/vehicles/22237567/1_cleaned.jpg?width=800",
-  },
-  {
-    year: "1990",
-    make: "Ferrari",
-    model: "Testarossa",
-    color: "red",
-    description: "good car",
-    price: "150000",
-    quantity: "1",
-    imageUrl:
-      "https://www.supercars.net/blog/wp-content/uploads/2020/10/1990_ferrari_testarossa_1602079317b225e2589d78f41990_ferrari_testarossa_1601823305208495d5614f88edf-c282-4a34-8bef-60af03320f23-7GHiKL-1.jpg",
-  },
-];
+async function fetchRandomVehicle(){
+  const upperApiLimit = 44290
+  const selectedRandomVehicle = Math.floor(Math.random() * upperApiLimit)
+  const colors = ['Blue','Green','Yellow','Orange','Red','white','Violet','Brown','Aqua','Black','Cyan','Purple']
+  const {data:selectedCar} = await axios.get(`https://www.fueleconomy.gov/ws/rest/vehicle/${selectedRandomVehicle}`)
+  const {data:carImage} = await axios.get(`http://www.carimagery.com/api.asmx/GetImageUrl?searchTerm=${selectedCar.year}%20${selectedCar.make}%20${selectedCar.model}`)
+  const descriptions =[
+    `Enjoy the fun and convenience of easy-to-park and easy-to-drive with this ${selectedCar.year} ${selectedCar.make} ${selectedCar.model}. The ${selectedCar.make} ${selectedCar.model} is one of ${selectedCar.make}’s most famous offerings, and this one is in excellent condition. Easily access the ${selectedCar.make} ${selectedCar.model}'s trunk in the back of the car at the touch of a button. This ${selectedCar.make} ${selectedCar.model} drives like a dream.`,
+    `A car that is sleek, stylish, and can get you from A to B. The ${selectedCar.year} ${selectedCar.make} ${selectedCar.model} is a car that might just drive well and has a good amount of miles. This vehicle is a beauty inside and out.`,
+    `For those just looking for a good time without compromising luxury and quality, the ${selectedCar.year} ${selectedCar.make} ${selectedCar.model} gives you the best of both worlds. You’re getting a car that might drive well, has a good amount of miles, and has an interior and exterior that are just as beautiful as they are unique.`,
+    `The ${selectedCar.year} ${selectedCar.make} ${selectedCar.model} is a truly modern luxury car with an outstanding powertrain that offers an impressive amount of power, swift acceleration, and excellent fuel mileage. The aggressively styled exterior is highlighted by sharp lines and a wide and pointed radiator grille, as well as attractive 18-inch alloy wheels for a refined appearance.`,
+    `The ${selectedCar.year} ${selectedCar.make} ${selectedCar.model} a car that might drive well.`,
+    `The ${selectedCar.year} ${selectedCar.make} ${selectedCar.model} has a sharp design with a lot of interior and exterior space. It's one of the best cars around, but it's not leaving the competition in the dust.`,
+    `The ${selectedCar.year} ${selectedCar.make} ${selectedCar.model} are a great value for their price and more importantly, are a Gasoline driven 4 wheeler. This vehicle has majestic design that includes its sleek trunk with peace sign stuck in it. ${selectedCar.make} ${selectedCar.model} is synonymous with luxury, technology and performance.`,
+    `Introducing the ${selectedCar.year} ${selectedCar.make} ${selectedCar.model}. This new ${selectedCar.make} creates all-new engineering, like our ground-breaking signature trim, dual-zone climate control and the ${selectedCar.make}Watch Plus security suite.`
+  ]
+  let carData = {
+    year: selectedCar.year,
+    make: selectedCar.make,
+    model: selectedCar.model,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    price: Math.floor(Math.random() * 100000),
+    quantity: Math.ceil(Math.random()*25),
+    description: descriptions[Math.floor(Math.random()*descriptions.length)],
+    imageUrl: convert(carImage),
+  }
+  return carData
+}
+const cars = [];
+async function populateCars(num){
+  for(let i=0; i<num; i++){
+    try {
+      cars.push(await fetchRandomVehicle())
+      if((i/num)==.25){
+        console.log(green('Populating completion: 25%'))
+      }else if((i/num)==.5){
+        console.log(green('Populating completion: 50%'))
+      }else if((i/num)==.75){
+        console.log(green('Populating completion: 75%'))
+      }
+    } catch (error) {
+      if(error.response.status === 404){
+        try {
+          console.log(red('Car not found trying another...'))
+          cars.push(await fetchRandomVehicle())
+        } catch (error) {
+          if(error.response.status === 404){
+            console.log(red('Error fetching from api please rerun the script...'))
+            break
+          }
+        }
+      }
+    }
+    
+  }
+}
 
 const users = [
   {
     name: "Bob",
     email: "bsmith@gmail.com",
     password: "123456789",
-    dateOfBirth: "01/01/1950",
+    dateOfBirth: new Date("01/01/1950"),
   },
   {
     name: "Mary",
     email: "msith@gmail.com",
     password: "123456789",
-    dateOfBirth: "01/01/1965",
+    dateOfBirth: new Date("01/01/1965"),
   },
 ];
 
@@ -69,6 +103,9 @@ const carts = [
 
 const seed = async () => {
   try {
+    console.log('Populating cars from api ',red('!!( api is free so you will have bad images requests are limited)!!'))
+    await populateCars(100);
+    console.log(green('Finished populating cars'))
     await db.sync({ force: true });
 
     await Promise.all(
@@ -92,7 +129,7 @@ const seed = async () => {
         })
     );
 
-    console.log(green("Seeding success!"));
+    console.log(green("Inital seeding success!"));
     db.close();
   } catch (err) {
     console.log(red(err));
