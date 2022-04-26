@@ -59,8 +59,9 @@ export const createCar = (car, history) => {
   };
 };
 
-export const deleteCar = (id) => {
+export const deleteCar = (id, history) => {
   return async (dispatch) => {
+
     const token = window.localStorage.getItem(TOKEN);
     if (token) {
       const { data } = await axios.delete(`/api/cars/${id}`, {
@@ -69,6 +70,7 @@ export const deleteCar = (id) => {
         },
       });
       dispatch(_deleteCar(data));
+      history.push("./")
     }
   };
 };

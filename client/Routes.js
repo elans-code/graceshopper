@@ -14,6 +14,7 @@ import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory';
 import CreateCar from "./components/CreateCar";
 import EditCar from "./components/EditCar";
+import GlobalCart from "./components/GlobalCart";
 /**
  * COMPONENT
  */
@@ -35,7 +36,7 @@ class Routes extends Component {
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/orders" component={OrderHistory} />
+            <Route exact path="/orders/:id" component={OrderHistory} />
           </Switch>
         ) : (
           <Switch>
@@ -50,10 +51,11 @@ class Routes extends Component {
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUserView} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/orders" component={OrderHistory} />
+            <Route exact path="/orders/:id" component={OrderHistory} />
             <Route exact path="/user/modify/:id" component={ModifyUser} />
           </Switch>
         )}
+        <GlobalCart />
       </div>
     );
   }

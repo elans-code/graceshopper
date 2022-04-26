@@ -7,11 +7,12 @@ module.exports = router;
 router.get("/:id", async (req, res, next) => {
   try {
     if (req.params.id) {
-      const items = await Cart.findOne({
+      const items = await Cart.findAll({
         where: {
           userId: req.params.id,
         },
       });
+      console.log(items)
       res.json(items);
     } else {
       res.send(window.localStorage.getItem("Cart", req.body));
@@ -21,18 +22,12 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/:id", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    if (req.params.id) {
-      const createCart = await Cart.create(req.body, {
-        where: {
-          userId: req.params.id,
-        },
-      });
-      res.json(createCart);
-    } else {
-      res.send(window.localStorage.setItem("Cart", req.body));
-    }
+    let newItems = req.body ?? null
+    const query = await Cart.upsert({items: newItems, userId: req.params.id})
+    console.log('req.body: ',newItems)
+    res.status(200).send();
   } catch (error) {
     next(error);
   }

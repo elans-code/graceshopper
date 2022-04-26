@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { fetchCar } from '../store/singleCarStore'
 import { Link } from 'react-router-dom'
+import {addToCart} from '../store/cartStore'
 
 /**
  * COMPONENT
@@ -15,7 +16,7 @@ class SingleCarView extends React.Component{
         this.props.fetchCarData(this.props.match.params.id)
     }
     handleCart(cardata){
-        //add car to cart
+        this.props.addedToCart(cardata, this.props.cart)
     }
     render(){
         const cardata = this.props.cardata
@@ -23,6 +24,7 @@ class SingleCarView extends React.Component{
         return (
             <div>{ cardata ? 
                 (<div>
+                    {this.props.isAdmin? <h2>ADMIN VIEW</h2> : <></>}
                     <div><h1>{cardata.year} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></div>
                     <div><img src= {cardata.imageUrl}/></div>
                     <div><h2>Year: {cardata.year}</h2></div>
@@ -33,7 +35,11 @@ class SingleCarView extends React.Component{
                     <div><h2>Description: {cardata.description}</h2></div>
                     <div><h2>Stock: {cardata.quantity}</h2></div>
                     <div><button type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</button></div>
+                    {this.props.isAdmin? (
                     <div><Link to={`/cars/edit/${cardata.id}`} >Edit</Link></div>
+                    ) : (
+                        <></>
+                    )}
                 </div>)
                 : 'There is no car data'
             }
@@ -48,12 +54,15 @@ class SingleCarView extends React.Component{
 const mapState = state => {
   return {
     username: state.auth.username,
-    cardata: state.cardata
+    cardata: state.cardata,
+    cart: state.cart,
+    isAdmin: state.auth.admin,
   }
 }
 const mapDispatch = (dispatch) =>{
     return{
-        fetchCarData: (id) => { dispatch(fetchCar(id)) }
+        fetchCarData: (id) => { dispatch(fetchCar(id)) },
+        addedToCart: (item, cart) => dispatch(addToCart(item, cart)),
     }
 }
 

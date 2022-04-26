@@ -1,11 +1,28 @@
-const chalk = require('chalk')
-const Sequelize = require('sequelize')
-const pkg = require('../../package.json')
+const chalk = require("chalk");
+const Sequelize = require("sequelize");
+const pkg = require("../../package.json");
 
-console.log(chalk.yellow('Opening database connection'))
+console.log(chalk.yellow("Opening database connection"));
 
-const db = new Sequelize(`postgres://localhost:5432/${pkg.name}`, {
-  logging: false
-})
+const config = {
+  logging: false,
+};
 
-module.exports = db
+// if (process.env.LOGGING === "true") {
+//   delete config.logging;
+// }
+
+// if (process.env.DATABASE_URL) {
+//   config.dialectOptions = {
+//     ssl: {
+//       rejectUnauthorized: false,
+//     },
+//   };
+// }
+
+const db = new Sequelize(
+  process.env.DATABASE_URL || `postgres://localhost:5432/${pkg.name}`,
+  config
+);
+
+module.exports = db;

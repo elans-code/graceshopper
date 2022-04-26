@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCars } from "../store/allCarsStore";
-import { updateCart, addToCart } from "../store/cartStore";
+import { fetchCars, deleteCar } from "../store/allCarsStore";
+import { updateCart, addToCart, saveCartToLocal, fetchCart } from "../store/cartStore";
 import { Link } from "react-router-dom";
 
 class AllCars extends React.Component {
@@ -14,17 +14,26 @@ class AllCars extends React.Component {
   }
 
   handleClick(car) {
-    this.props.addedToCart(car, this.props.cart);
-    //this.props.updateToCart(this.props.cart);
+    if(!!this.props.auth){
+      this.props.addedToCart(car, this.props.cart, this.props.auth);
+    }else{
+      this.props.addedToCart(car, this.props.cart, -1);
+    }
   }
 
   render() {
     return (
       <div>
         {/* if admin, then render the link to CreateCar component otherwise don't */}
+        {console.log("yo!!!!", this.props)}
+        {this.props.isAdmin? (
         <div>
+          <h2>ADMIN VIEW</h2>
           <Link to="cars/create">Add New Car</Link>
         </div>
+        ) : (
+          <></>
+        )}
         <div>
           {this.props.cars.map((car) => {
             return (
@@ -57,6 +66,11 @@ class AllCars extends React.Component {
                     Add to cart
                   </button>
                 </div>
+                {this.props.isAdmin? (
+                <div>
+                  <button type="submit" onClick={()=> this.props.deleteCar(car.id)}>Remove</button>
+                </div>
+                ):(<></>)}
               </div>
             );
           })}
@@ -70,14 +84,17 @@ const mapStateToProps = (state) => {
   return {
     cars: state.cars,
     cart: state.cart,
+    isLoggedIn: !!state.auth.id,
+    auth: state.auth.id,
+    isAdmin: state.auth.admin,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getCars: () => dispatch(fetchCars()),
-    addedToCart: (item, cart) => dispatch(addToCart(item, cart)),
-    updateToCart: (cart) => dispatch(updateCart(cart)),
+    deleteCar: (car) => dispatch(deleteCar(car, history)),
+    addedToCart: (item, cart, userId) => dispatch(addToCart(item, cart, userId)),
   };
 };
 
