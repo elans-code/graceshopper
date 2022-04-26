@@ -51,10 +51,11 @@ export const createCar = (car, history) => {
   };
 };
 
-export const deleteCar = (id) => {
+export const deleteCar = (id, history) => {
   return async (dispatch) => {
     const {data} = await axios.delete(`/api/cars/${id}`)
     dispatch(_deleteCar(data))
+    history.push("./")
   }
 }
 
