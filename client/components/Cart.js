@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
-import { modifyCartQuantity, removeFromCart } from '../store/cartStore'
+import { modifyCartQuantity, removeAllFromCart, removeFromCart } from '../store/cartStore'
 import { addToOrders } from '../store/orderStore'
 /**
  * COMPONENT
@@ -19,9 +19,8 @@ class Cart extends React.Component{
         this.handleCheckout = this.handleCheckout.bind(this)
     }
     handleCheckout(cartdata, userId){
-        console.log("cart data", cartdata)
-        console.log("cart quant", cartdata[0].quantity)
         this.props.addToOrders(cartdata, userId)
+        this.props.emptyCart(cartdata,userId)
         //checkout with payment processor
     }
     handleRemoveItem(item){
@@ -94,8 +93,8 @@ const mapDispatch = (dispatch, {history}) =>{
     return{
         removeItemFromCart: (item,cart,userId) => dispatch(removeFromCart(item, cart, userId)),
         modifyCartItemQuantity: (item,value,cart) => dispatch(modifyCartQuantity(item,value,cart)),
-        fetchCartData: (username) => { /*dispatch( add thunk for fetch cart data )*/ },
-        addToOrders:(order, userId) => dispatch(addToOrders(order, userId, history))
+        addToOrders:(order, userId) => dispatch(addToOrders(order, userId, history)),
+        emptyCart: (cart,userId)=> dispatch(removeAllFromCart(cart,userId))
     }
 }
 

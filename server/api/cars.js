@@ -80,7 +80,7 @@ router.put("/:id", requireToken, async (req, res, next) => {
 });
 
 // Delete a car listing
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id",requireToken, async (req, res, next) => {
   try {
     if (req.user.admin) {
       const carToDelete = await Car.findByPk(req.params.id);

@@ -1,4 +1,4 @@
-const { green, red } = require("chalk");
+const { green, red, yellow } = require("chalk");
 const { db } = require("./server/db");
 const Car = require("./server/db/models/Car");
 const User = require("./server/db/models/User");
@@ -51,7 +51,7 @@ async function populateCars(num){
     } catch (error) {
       if(error.response.status === 404){
         try {
-          console.log(red('Car not found trying another...'))
+          console.log(yellow('Car not found trying another...'))
           cars.push(await fetchRandomVehicle())
         } catch (error) {
           if(error.response.status === 404){
@@ -96,10 +96,12 @@ const carts = [
   {
     item: "CAR",
     price: "2500",
+    userId: 2,
   },
   {
     item: "OTHER CAR",
     price: "100",
+    userId: 1,
   },
 ];
 

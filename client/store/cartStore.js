@@ -1,4 +1,5 @@
 import axios from "axios";
+const TOKEN = "token";
 
 // Action Types
 const SET_CART = "SET_CART";
@@ -22,16 +23,23 @@ const _updateCart = (cartdata) => {
 //Thunks
 export const fetchCart = (userId) => {
   return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
     if(!userId){
       dispatch(getCartFromLocal())
     }
     else{
-      const { data } = await axios.get(`/api/cart/${userId}`);
-      let dbCart = data[0].items
-      if(dbCart == null){
-        dbCart = [];
+      if(token){
+        const { data } = await axios.get(`/api/cart/${userId}`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        let dbCart = data[0].items
+        if(dbCart == null){
+          dbCart = [];
+        }
+        dispatch(_setCart(dbCart));
       }
-      dispatch(_setCart(dbCart));
     }
   };
 };
@@ -79,6 +87,22 @@ export const removeFromCart = (item, cart, userId) => {
     let newCart = cart.filter((e)=>{
       if(!!e.item){
         return e.item.id !== item
+      }
+    })
+    console.log(userId)
+    if(userId>0){
+      dispatch(updateCart(newCart,userId))
+      dispatch(_setCart(newCart))
+    }else{
+      dispatch(_setCart(newCart))
+    }
+  }
+}
+export const removeAllFromCart = (cart, userId) => {
+  return async (dispatch) => {
+    let newCart = cart.filter((e)=>{
+      if(!!e.item){
+        return e.item.id == -1
       }
     })
     console.log(userId)
