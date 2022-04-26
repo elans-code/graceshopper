@@ -36,6 +36,7 @@ const users = [
     email: "bsmith@gmail.com",
     password: "123456789",
     dateOfBirth: "01/01/1950",
+    admin: true,
   },
   {
     name: "Mary",
