@@ -14,6 +14,7 @@ import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory';
 import CreateCar from "./components/CreateCar";
 import EditCar from "./components/EditCar";
+import GlobalCart from "./components/GlobalCart";
 /**
  * COMPONENT
  */
@@ -54,6 +55,7 @@ class Routes extends Component {
             <Route exact path="/user/modify/:id" component={ModifyUser} />
           </Switch>
         )}
+        <GlobalCart />
       </div>
     );
   }

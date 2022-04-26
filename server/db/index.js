@@ -7,8 +7,8 @@ const Order = require('./models/Order')
 
 Order.belongsTo(User)
 User.hasMany(Order)
-Cart.belongsTo(User)
-Cart.hasMany(Car)
+User.hasOne(Cart)
+Cart.belongsTo(User,{foreignKey:{unique:true}})
 Order.hasMany(Car)
 // Cart.belongsToMany(Car, { through: Order });
 // Car.belongsToMany(Cart, { through: Order });
