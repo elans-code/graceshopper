@@ -35,7 +35,7 @@ class AllCars extends React.Component {
         {this.props.isAdmin ? (
           <div>
             <h2>ADMIN VIEW</h2>
-            <Link to="cars/create">Add New Car</Link>
+            <Link to="/cars/modify/create">Add New Car</Link>
           </div>
         ) : (
           <></>

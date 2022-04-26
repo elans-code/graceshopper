@@ -39,30 +39,30 @@ class CreateCar extends React.Component {
         <form onSubmit={this.handleSubmit}>
           
             <label htmlFor="make"> Car Make:</label>
-            <input name="make" onChange={this.handleChange} value={make} />
+            <input name="make" type='text' onChange={this.handleChange} value={make} />
 
             <label htmlFor="model">Car Model:</label>
-            <input name="model" onChange={this.handleChange} value={model} />
+            <input name="model" type='text'  onChange={this.handleChange} value={model} />
           
           
             <label htmlFor="year">Car Year:</label>
-            <input name="year" onChange={this.handleChange} value={year} />
+            <input name="year" type='text' onChange={this.handleChange} value={year} />
           
           
             <label htmlFor="price">Car Price:</label>
-            <input name="price" onChange={this.handleChange} value={price} />
+            <input name="price" type='text' onChange={this.handleChange} value={price} />
           
           
             <label htmlFor="color">Car Color:</label>
-            <input name="color" onChange={this.handleChange} value={color} />
+            <input name="color" type='text' onChange={this.handleChange} value={color} />
           
           
             <label htmlFor="quantity">Car Quantity:</label>
-            <input name="quantity" onChange={this.handleChange} value={quantity} />
+            <input name="quantity" type='text' onChange={this.handleChange} value={quantity} />
           
           
             <label htmlFor="description">Car description:</label>
-            <input name="description" onChange={this.handleChange} value={description} />
+            <input name="description" type='text' onChange={this.handleChange} value={description} />
           
           
             <button className="btn" type="submit">Submit</button>
