@@ -16,7 +16,12 @@
     "test": "NODE_ENV=test JWT=a_secret mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" --require @babel/register --require esm ",
     "test:dev": "npm run test -- --watch",
     "test:dev:models": "npm run test:dev -- --grep=model",
-    "test:dev:routes": "npm run test:dev -- --grep=route"
+    "test:dev:routes": "npm run test:dev -- --grep=route",
+    "start:build:seed": "node seed.js",
+    "start:build:css": "npx tailwindcss -i ./client/src.css -o ./public/style.css",
+    "start:build:src": "npm run build -- --watch --mode=production",
+
+    "start:production:seed": "npm run start:build:seed & npm run start:build:css & npm run start:build:src"
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
