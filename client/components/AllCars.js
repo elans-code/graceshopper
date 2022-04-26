@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchCars } from "../store/allCarsStore";
 import { updateCart, addToCart, saveCartToLocal, fetchCart } from "../store/cartStore";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 class AllCars extends React.Component {
   constructor() {
@@ -23,19 +24,20 @@ class AllCars extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="flex flex-col justify-center">
         {/* if admin, then render the link to CreateCar component otherwise don't */}
         <div>
           <Link to="cars/create">Add New Car</Link>
         </div>
-        <div className="flex flex-row flex-wrap">
+        <div className="flex flex-row flex-wrap justify-center">
           {this.props.cars.map((car) => {
             return (
-              <div key={car.id} className="all-cars">
+              <motion.div key={car.id} className="flex flex-col justify-center border-2 border-blue-900 rounded-xl m-2 p-2">
                 <Link to={`/cars/${car.id}`}>
-                  <div>
-                    <img
-                      className="all-cars-img"
+                  <div className="flex flex-col justify-center text-center items-center">
+                    <motion.img
+                      whileHover={{scale: 2}}
+                      className="rounded-xl"
                       src={car.imageUrl}
                       width="250"
                       height="250"
@@ -51,16 +53,18 @@ class AllCars extends React.Component {
                     </p>
                   </div>
                 </Link>
-                <div>
-                  <button
-                    className="all-cars-btn"
+                <div className="flex justify-center m-2 ">
+                  <motion.button
+                    whileHover = {{scale: 1.2,}}
+                    whileTap = {{scale: .8}}
+                    className="border-2 border-blue-900 px-4 py-2 rounded-full hover:bg-blue-900 hover:text-white"
                     type="submit"
                     onClick={() => this.handleClick(car)}
                   >
                     Add to cart
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
