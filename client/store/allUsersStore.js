@@ -1,5 +1,6 @@
 import Axios from "axios";
 
+const TOKEN = "token";
 const SET_USERS = "SET_USERS";
 const CREATE_USER = "CREATE_USER";
 const DELETE_USER = "DELETE_USER";
@@ -27,18 +28,32 @@ const deleteUser = (user) => {
 
 export const createUser = (user, history) => {
   return async (dispatch) => {
-    const { data: created } = await Axios.post("/api/users", user);
-    dispatch(_createUser(created));
-    history.push("/");
+    const token = window.localStorage.getItem(TOKEN);
+    if (token) {
+      const { data: created } = await Axios.post("/api/users", user, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch(_createUser(created));
+      history.push("/");
+    }
   };
 };
 
 export const fetchUsers = () => {
   return async (dispatch) => {
     try {
-      const response = await Axios.get("/api/users");
-      const data = response.data;
-      dispatch(setUsers(data));
+      const token = window.localStorage.getItem(TOKEN);
+      if (token) {
+        const response = await Axios.get("/api/users", {
+          headers: {
+            authorization: token,
+          },
+        });
+        const data = response.data;
+        dispatch(setUsers(data));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -48,11 +63,14 @@ export const fetchUsers = () => {
 export const removeUser = (id, history) => {
   return async (dispatch) => {
     try {
-      const { data } = await Axios.delete(`/api/users/${id}`);
-      dispatch(deleteUser(data));
-      //const { newData } = await Axios.get(`/api/users`);
-      //dispatch(setUsers(newData));
-      history.push("/users");
+      const token = window.localStorage.getItem(TOKEN);
+      if (token) {
+        const { data } = await Axios.delete(`/api/users/${id}`);
+        dispatch(deleteUser(data));
+        //const { newData } = await Axios.get(`/api/users`);
+        //dispatch(setUsers(newData));
+        history.push("/users");
+      }
     } catch (err) {}
   };
 };

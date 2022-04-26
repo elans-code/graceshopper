@@ -24,6 +24,7 @@ class SingleCarView extends React.Component{
         return (
             <div>{ cardata ? 
                 (<div>
+                    {this.props.isAdmin? <h2>ADMIN VIEW</h2> : <></>}
                     <div><h1>{cardata.year} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></div>
                     <div><img src= {cardata.imageUrl}/></div>
                     <div><h2>Year: {cardata.year}</h2></div>
@@ -34,7 +35,11 @@ class SingleCarView extends React.Component{
                     <div><h2>Description: {cardata.description}</h2></div>
                     <div><h2>Stock: {cardata.quantity}</h2></div>
                     <div><button type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</button></div>
+                    {this.props.isAdmin? (
                     <div><Link to={`/cars/edit/${cardata.id}`} >Edit</Link></div>
+                    ) : (
+                        <></>
+                    )}
                 </div>)
                 : 'There is no car data'
             }
@@ -51,6 +56,7 @@ const mapState = state => {
     username: state.auth.username,
     cardata: state.cardata,
     cart: state.cart,
+    isAdmin: state.auth.admin,
   }
 }
 const mapDispatch = (dispatch) =>{

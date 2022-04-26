@@ -7,6 +7,7 @@ const Cart = require("./server/db/models/Cart")
 const axios = require("axios")
 const {convert} = require('html-to-text')
 
+
 async function fetchRandomVehicle(){
   const upperApiLimit = 44290
   const selectedRandomVehicle = Math.floor(Math.random() * upperApiLimit)
@@ -70,6 +71,7 @@ const users = [
     email: "bsmith@gmail.com",
     password: "123456789",
     dateOfBirth: new Date("01/01/1950"),
+    admin: true,
   },
   {
     name: "Mary",
@@ -88,7 +90,7 @@ const orders = [
     item: "OTHER CAR PURCHASED",
     price: "100",
   },
-]
+];
 
 const carts = [
   {
@@ -99,7 +101,7 @@ const carts = [
     item: "OTHER CAR",
     price: "100",
   },
-]
+];
 
 const seed = async () => {
   try {
@@ -117,16 +119,16 @@ const seed = async () => {
       users.map((user) => {
         return User.create(user);
       })
-      );
-      await Promise.all(
-        carts.map((cart) => {
-          return Cart.create(cart);
-        })
-        );
-      await Promise.all(
-        orders.map((order) => {
-          return Order.create(order);
-        })
+    );
+    await Promise.all(
+      carts.map((cart) => {
+        return Cart.create(cart);
+      })
+    );
+    await Promise.all(
+      orders.map((order) => {
+        return Order.create(order);
+      })
     );
 
     console.log(green("Inital seeding success!"));
