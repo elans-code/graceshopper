@@ -85,7 +85,7 @@ class Cart extends React.Component{
  */
 const mapState = state => {
   return {
-    username: state.auth.username,
+    username: state.auth.name,
     cart: state.cart,
     auth: state.auth.id,
   }
