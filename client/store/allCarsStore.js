@@ -59,7 +59,7 @@ export const createCar = (car, history) => {
   };
 };
 
-export const deleteCar = (id, history) => {
+export const deleteCar = (id) => {
   return async (dispatch) => {
 
     const token = window.localStorage.getItem(TOKEN);
@@ -70,7 +70,6 @@ export const deleteCar = (id, history) => {
         },
       });
       dispatch(_deleteCar(data));
-      history.push("./")
     }
   };
 };
