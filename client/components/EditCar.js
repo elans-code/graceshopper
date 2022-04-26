@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchCar, updateSingleCar } from "../store/singleCarStore";
 import { updateCar } from "../store/allCarsStore";
+import { Redirect } from "react-router-dom";
 
 //not fully complete yet
 
@@ -48,6 +49,7 @@ class EditCar extends React.Component {
     event.preventDefault();
     // this.props.updateCar({ ...this.props.carData, ...this.state });
     this.props.updateSingleCar({ ...this.props.carData, ...this.state });
+    <Redirect to="/cars"/>
   }
 
   render() {

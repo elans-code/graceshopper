@@ -66,7 +66,7 @@ class CreateCar extends React.Component {
           
           
             <button className="btn" type="submit">Submit</button>
-            <Link to="/" >Cancel</Link>
+            <Link to="/cars" >Cancel</Link>
         </form>
       </div>
     );
