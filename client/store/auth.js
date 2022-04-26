@@ -33,6 +33,7 @@ export const authenticate = (name, password, method) => async (dispatch) => {
     const res = await axios.post(`/auth/${method}`, { name, password });
     window.localStorage.setItem(TOKEN, res.data.token);
     dispatch(me());
+    history.push("/cars");
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
