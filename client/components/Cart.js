@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
 import { modifyCartQuantity, removeFromCart } from '../store/cartStore'
 import { addToOrders } from '../store/orderStore'
 /**
@@ -15,9 +16,12 @@ class Cart extends React.Component{
         this.handleCheckout = this.handleCheckout.bind(this)
         this.handleRemoveItem = this.handleRemoveItem.bind(this)
         this.handleQuantity = this.handleQuantity.bind(this)
+        this.handleCheckout = this.handleCheckout.bind(this)
     }
-    handleCheckout(cartdata){
-        this.props.addToOrders(cartdata)
+    handleCheckout(cartdata, userId){
+        console.log("cart data", cartdata)
+        console.log("cart quant", cartdata[0].quantity)
+        this.props.addToOrders(cartdata, userId)
         //checkout with payment processor
     }
     handleRemoveItem(item){
@@ -70,7 +74,7 @@ class Cart extends React.Component{
                 </div>
                 <div><h2>Number of items in cart: {numberOfItems}</h2></div>
                 <div><h2>Subtotal: {cartTotal}</h2></div>
-                <div><button type='button' onClick={()=>{this.handleCheckout}}>Checkout</button></div>
+                <div><button type='button' onClick={()=> (this.handleCheckout(cartdata, cartdata[0].quantity))}> Checkout</button> </div>
             </div>
         )
     };
@@ -86,12 +90,12 @@ const mapState = state => {
     auth: state.auth.id,
   }
 }
-const mapDispatch = (dispatch, { history }) =>{
+const mapDispatch = (dispatch, {history}) =>{
     return{
         removeItemFromCart: (item,cart,userId) => dispatch(removeFromCart(item, cart, userId)),
         modifyCartItemQuantity: (item,value,cart) => dispatch(modifyCartQuantity(item,value,cart)),
         fetchCartData: (username) => { /*dispatch( add thunk for fetch cart data )*/ },
-        addToOrders:(order) => dispatch(addToOrders(order, history))
+        addToOrders:(order, userId) => dispatch(addToOrders(order, userId, history))
     }
 }
 
