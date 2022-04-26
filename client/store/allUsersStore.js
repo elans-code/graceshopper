@@ -28,16 +28,9 @@ const deleteUser = (user) => {
 
 export const createUser = (user, history) => {
   return async (dispatch) => {
-    const token = window.localStorage.getItem(TOKEN);
-    if (token) {
-      const { data: created } = await Axios.post("/api/users", user, {
-        headers: {
-          authorization: token,
-        },
-      });
+      const { data: created } = await Axios.post("/api/users", user);
       dispatch(_createUser(created));
       history.push("/");
-    }
   };
 };
 

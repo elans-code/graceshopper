@@ -42,7 +42,7 @@ router.get("/:id", requireToken, async (req, res, next) => {
   }
 });
 
-router.post("/", requireToken, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await User.create(req.body));
   } catch (error) {
