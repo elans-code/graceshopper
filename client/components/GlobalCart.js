@@ -11,18 +11,20 @@ class GlobalCart extends React.Component{
     }
     componentDidMount(){
         const {username} = this.props
-        if(this.props.isLoggedIn){
-            this.props.fetchCarts(state.auth.id)
-        }else{
-            this.props.fetchCarts()
-        }
     }
     componentDidUpdate(prev){
         if(this.props.cart !== prev.cart){
             if(this.props.isLoggedIn){
-                this.props.updateDBCart(this.props.cart);
+                this.props.updateDBCart(this.props.cart, this.props.auth);
             }else{
                 saveCartToLocal(this.props.cart);
+            }
+        }
+        if(this.props.isLoggedIn!==prev.isLoggedIn){
+            if(this.props.isLoggedIn){
+                this.props.fetchCarts(this.props.auth)
+            }else{
+                this.props.fetchCarts()
             }
         }
     }
@@ -39,7 +41,8 @@ const mapState = state => {
   return {
     username: state.auth.username,
     cart: state.cart,
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    auth: state.auth.id
   }
 }
 const mapDispatch = (dispatch) => {
@@ -47,7 +50,7 @@ const mapDispatch = (dispatch) => {
       getCars: () => dispatch(fetchCars()),
       fetchCarts: (user) => dispatch(fetchCart(user)),
       addedToCart: (item, cart) => dispatch(addToCart(item, cart)),
-      updateDBCart: (cart) => dispatch(updateCart(cart)),
+      updateDBCart: (cart, userId) => dispatch(updateCart(cart,userId)),
     };
   };
 

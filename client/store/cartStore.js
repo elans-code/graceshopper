@@ -20,37 +20,41 @@ const _updateCart = (cartdata) => {
 };
 
 //Thunks
-export const fetchCart = (user="guest") => {
+export const fetchCart = (userId) => {
   return async (dispatch) => {
-    console.log('fetching cart user:',user)
-    if(user==='guest'){
+    if(!userId){
       dispatch(getCartFromLocal())
     }
     else{
-      const { data } = await axios.get(`/api/cart/${user.id}`);
-      dispatch(_setCart(data));
+      const { data } = await axios.get(`/api/cart/${userId}`);
+      let dbCart = data[0].items
+      if(dbCart == null){
+        dbCart = [];
+      }
+      dispatch(_setCart(dbCart));
     }
   };
 };
 
-export const updateCart = (cart) => {
+export const updateCart = (cart, userId) => {
   return async (dispatch) => {
-    const { data } = await axios.put(`/api/cart/${cart.id}`, cart);
-    console.log('data',data)
-    dispatch(_updateCart(data));
+    console.log('cart',cart,' user',userId)
+    await axios.put(`/api/cart/${userId}`, cart);
+    //dispatch(_updateCart(data));
   };
 };
 
-export const addToCart = (item, cart) => {
+export const addToCart = (item, cart, userId) => {
   return async (dispatch) => {
     let alreadyInCart = false
     let newCart = []
     if(cart!==null){
       newCart = cart.map(e=>{
-        console.log(e)
-        if(e.id === item.id){
-          e.quantity++
-          alreadyInCart = true
+        if(!!e.item){
+          if(e.item.id === item.id){
+            e.quantity++
+            alreadyInCart = true
+          }
         }
         return e
       })
@@ -59,13 +63,45 @@ export const addToCart = (item, cart) => {
       if(cart === null){
         cart = [];
       }
-      cart = [...cart, item];
+      cart = [...cart, {item , quantity: 1}];
     }else{
       cart = newCart
+    }
+    if(userId>0){
+      dispatch(updateCart(cart,userId))
     }
     dispatch(_setCart(cart));
   };
 };
+
+export const removeFromCart = (item, cart, userId) => {
+  return async (dispatch) => {
+    let newCart = cart.filter((e)=>{
+      if(!!e.item){
+        return e.item.id !== item
+      }
+    })
+    console.log(userId)
+    if(userId>0){
+      dispatch(updateCart(newCart,userId))
+      dispatch(_setCart(newCart))
+    }else{
+      dispatch(_setCart(newCart))
+    }
+  }
+}
+
+export const modifyCartQuantity = (item,value,cart) =>{
+  return (dispatch) =>{
+    let newCart = cart.map(cart =>{
+      if(cart.item.id === item.id){
+        cart.quantity = value
+      }
+      return cart
+    })
+    dispatch(_setCart(newCart))
+  }
+}
 
 export const saveCartToLocal = (cart) => {
   localStorage.setItem('local_cart', JSON.stringify(cart))
@@ -76,7 +112,6 @@ export const getCartFromLocal = () =>{
   return (dispatch) => {
     const localCart = localStorage.getItem('local_cart')
     const oldCart = JSON.parse(localCart)
-    console.log('old cart:',oldCart)
     dispatch(_setCart(oldCart))
   }
 }

@@ -14,8 +14,11 @@ class AllCars extends React.Component {
   }
 
   handleClick(car) {
-    this.props.addedToCart(car, this.props.cart);
-    //this.props.updateToCart(this.props.cart);
+    if(!!this.props.auth){
+      this.props.addedToCart(car, this.props.cart, this.props.auth);
+    }else{
+      this.props.addedToCart(car, this.props.cart, -1);
+    }
   }
 
   render() {
@@ -70,14 +73,15 @@ const mapStateToProps = (state) => {
   return {
     cars: state.cars,
     cart: state.cart,
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    auth: state.auth.id
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getCars: () => dispatch(fetchCars()),
-    addedToCart: (item, cart) => dispatch(addToCart(item, cart)),
+    addedToCart: (item, cart, userId) => dispatch(addToCart(item, cart, userId)),
   };
 };
 

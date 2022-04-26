@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { modifyCartQuantity, removeFromCart } from '../store/cartStore'
 
 /**
  * COMPONENT
@@ -11,7 +12,6 @@ class Cart extends React.Component{
     }
     componentDidMount(){
         const {username} = this.props
-        username ? this.props.fetchCartData(username) : this.props.fetchCartData('guest')
         this.handleCheckout = this.handleCheckout.bind(this)
         this.handleRemoveItem = this.handleRemoveItem.bind(this)
         this.handleQuantity = this.handleQuantity.bind(this)
@@ -19,15 +19,21 @@ class Cart extends React.Component{
     handleCheckout(cartdata){
         //checkout with payment processor
     }
-    handleRemoveItem(itemId){
-        //remove item from redux store
-    }
-    handleQuantity(event){
-        const newQuantity = event.target.value
-        if(newQuantity>1){
-
+    handleRemoveItem(item){
+        if(!!this.props.auth){
+            console.log(this.props.auth)
+            this.props.removeItemFromCart(item, this.props.cart, this.props.auth)
+        }else{
+            this.props.removeItemFromCart(item, this.props.cart, -1)
         }
-
+    }
+    handleQuantity(event, item){
+        const newQuantity = parseInt(event.target.value)
+        if(newQuantity>0){
+            this.props.modifyCartItemQuantity(item,newQuantity,this.props.cart)
+        }else{
+            this.props.removeItemFromCart(item.id, this.props.cart)
+        }
     }
     render(){
         const {username} = this.props
@@ -41,19 +47,21 @@ class Cart extends React.Component{
                 { 
                     cartdata ? 
                     cartdata.map
-                    ((item) =>
+                    ((cartItem) =>
                         {
-                            cartTotal += item.price * item.quantity
-                            numberOfItems += item.quantity
-                            return (
-                            <div key={item.id}>
-                                <div><h2>{item.name}</h2></div>
-                                <div><img src={item.imageUrl}/></div>
-                                <div><h2>Price: {item.price}</h2></div>
-                                <div><h2>Quantity: </h2><input type='number' value={item.quantity} name={item.id} onChange={this.handleQuantity}/></div>
-                                <div><button type='button' onClick={()=>{this.handleRemoveItem(item.id)}}>Remove Item</button></div>
-                            </div>
-                            )
+                            if(!!cartItem.item){
+                                cartTotal += cartItem.item.price * cartItem.quantity
+                                numberOfItems = numberOfItems + cartItem.quantity
+                                return (
+                                <div key={cartItem.item.id}>
+                                    <div><h2>{cartItem.item.name}</h2></div>
+                                    <div><img src={cartItem.item.imageUrl}/></div>
+                                    <div><h2>Price: {cartItem.item.price}</h2></div>
+                                    <div><h2>Quantity: {cartItem.quantity} </h2><input type='number' value={cartItem.quantity} name={cartItem.item.id} onChange={(e)=>{this.handleQuantity(e,cartItem.item)}}/></div>
+                                    <div><button type='button' onClick={()=>{this.handleRemoveItem(cartItem.item.id)}}>Remove Item</button></div>
+                                </div>
+                                )
+                            }
                         }
                     )
                     : "Theres nothing in the cart"
@@ -73,12 +81,14 @@ class Cart extends React.Component{
 const mapState = state => {
   return {
     username: state.auth.username,
-    cart: state.cart
+    cart: state.cart,
+    auth: state.auth.id,
   }
 }
 const mapDispatch = (dispatch) =>{
     return{
-        fetchCartData: (username) => { /*dispatch( add thunk for fetch cart data )*/ }
+        removeItemFromCart: (item,cart,userId) => dispatch(removeFromCart(item, cart, userId)),
+        modifyCartItemQuantity: (item,value,cart) => dispatch(modifyCartQuantity(item,value,cart))
     }
 }
 
