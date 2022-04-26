@@ -1,16 +1,17 @@
 import axios from "axios";
 
 // Action Types
-const SET_SINGLE_CAR = "SET_SINGLE_CAR"
-const UPDATE_SINGLE_CAR = "UPDATE_SINGLE_CAR"
+const SET_SINGLE_CAR = "SET_SINGLE_CAR";
+const UPDATE_SINGLE_CAR = "UPDATE_SINGLE_CAR";
+const TOKEN = "token";
 
 // Action creators
 export const _setSingleCar = (cardata) => {
-    return {
-        type: SET_SINGLE_CAR,
-        cardata
-    }
-}
+  return {
+    type: SET_SINGLE_CAR,
+    cardata,
+  };
+};
 
 const _updateSingleCar = (cardata) => {
   return {
@@ -21,32 +22,39 @@ const _updateSingleCar = (cardata) => {
 
 //Thunks
 export const fetchCar = (id) => {
-    return async (dispatch) => {
-        const {data} = await axios.get(`/api/cars/${id}`)
-        dispatch(_setSingleCar(data))
-    }
-}
+  return async (dispatch) => {
+    const { data } = await axios.get(`/api/cars/${id}`);
+    dispatch(_setSingleCar(data));
+  };
+};
 
 export const updateSingleCar = (car) => {
   return async (dispatch) => {
     try {
-    await axios.put(`/api/cars/update/${car.id}`, car)
-    const {data: carData} = await axios.get(`/api/cars/${car.id}`);
-    dispatch(_setSingleCar(carData))
+      const token = window.localStorage.getItem(TOKEN);
+      if (token) {
+        await axios.put(`/api/cars/update/${car.id}`, car, {
+          headers: {
+            authorization: token,
+          },
+        });
+        const { data: carData } = await axios.get(`/api/cars/${car.id}`);
+        dispatch(_setSingleCar(carData));
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
 
-// reducer 
+// reducer
 const initialState = [];
 const singleCarReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SINGLE_CAR:
-      return action.cardata
+      return action.cardata;
     case UPDATE_SINGLE_CAR:
-      return action.cardata
+      return action.cardata;
     default:
       return state;
   }
