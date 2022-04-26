@@ -814,17 +814,6 @@ select {
   border-color: rgb(30 58 138 / var(--tw-border-opacity));
 }
 
-.border-x-blue-900 {
-  --tw-border-opacity: 1;
-  border-left-color: rgb(30 58 138 / var(--tw-border-opacity));
-  border-right-color: rgb(30 58 138 / var(--tw-border-opacity));
-}
-
-.bg-blue-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
-}
-
 .p-2 {
   padding: 0.5rem;
 }
@@ -853,11 +842,6 @@ select {
 
 .capitalize {
   text-transform: capitalize;
-}
-
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .shadow {
