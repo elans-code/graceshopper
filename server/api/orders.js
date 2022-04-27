@@ -31,7 +31,7 @@ router.post("/", async (req, res, next) => {
 
   try {
 
-      const createOrder = await Order.create({quantity: req.body.quantity, price: req.body.price, userId: req.body.userId })
+      const createOrder = await Order.create({item: req.body.item, quantity: req.body.quantity, price: req.body.price, userId: req.body.userId })
 
     res.json(createOrder);
   } catch (error) {

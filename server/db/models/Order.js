@@ -3,7 +3,7 @@ const db = require('../db')
 
 
 const Order = db.define('order', {
-  item: { type: Sequelize.STRING,
+  item: { type: Sequelize.TEXT,
     },
     quantity: { type: Sequelize.INTEGER,
     },

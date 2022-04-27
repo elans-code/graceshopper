@@ -30,6 +30,7 @@ class OrderHistory extends React.Component {
               <div key={order.id} className="all-orders">
                 <div> ORDER </div>
                   <div>
+                  <p>ITEMS: {order.item}</p>
                     <p>Number of Cars: {order.quantity}</p>
                      <p>Price: {order.price}</p>
                      <p>Time of Purchase: {order.createdAt}</p>
