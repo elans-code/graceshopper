@@ -4,6 +4,9 @@ import { fetchCar, updateSingleCar } from "../store/singleCarStore";
 import { updateCar } from "../store/allCarsStore";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { buttons, formInput, formLabel, formLastDiv, forms, formSubDiv, formTitle, maindiv1, maindiv2 } from "../styleClassNames";
+
 //not fully complete yet
 
 class EditCar extends React.Component {
@@ -59,41 +62,69 @@ class EditCar extends React.Component {
 
   render() {
     const { make, model, year, price, color, quantity, description } = this.state;
+    const { name, password, email, dateOfBirth } = this.state;
+    const { handleSubmit } = this;
+    const randomX = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+    const randomy = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+    const randomDelay = Math.floor(Math.random()*1.5)
     return (
-      <div className="flex justify-center">
-        <form onSubmit={this.handleSubmit}>
-          
-            <label htmlFor="make"> Car Make:</label>
-            <input name="make" type='text' onChange={this.handleChange} value={make} />
-
-            <label htmlFor="model">Car Model:</label>
-            <input name="model" type='text'  onChange={this.handleChange} value={model} />
-          
-          
-            <label htmlFor="year">Car Year:</label>
-            <input name="year" type='text' onChange={this.handleChange} value={year} />
-          
-          
-            <label htmlFor="price">Car Price:</label>
-            <input name="price" type='text' onChange={this.handleChange} value={price} />
-          
-          
-            <label htmlFor="color">Car Color:</label>
-            <input name="color" type='text' onChange={this.handleChange} value={color} />
-          
-          
-            <label htmlFor="quantity">Car Quantity:</label>
-            <input name="quantity" type='text' onChange={this.handleChange} value={quantity} />
-          
-          
-            <label htmlFor="description">Car description:</label>
-            <input name="description" type='text' onChange={this.handleChange} value={description} />
-          
-          
-            <button className="btn" type="submit">Submit</button>
-            <Link to="/cars" >Cancel</Link>
-        </form>
-      </div>
+      <motion.div
+        initial={{
+          opacity: 0,
+          x:`${randomX}`,
+          y:`${randomy}`,
+          scale: 0
+        }}
+        whileInView={{
+          opacity: 1,
+          x:0,
+          y:0,
+          scale: 1
+        }}
+        transition={{
+          delay: randomDelay
+        }}
+       className={maindiv1}>
+          <div className={maindiv2}>
+          <div>
+            <div className={formTitle}>Modify Vehicle</div>
+          </div>
+          <form className={forms} onSubmit={this.handleSubmit}>
+            <div className={formSubDiv}>
+              <label className={formLabel} htmlFor="make"> Car Make:</label>
+              <input className={formInput} name="make" type='text' onChange={this.handleChange} value={make} />
+            </div>
+            <div className={formSubDiv}>
+              <label className={formLabel} htmlFor="model">Car Model:</label>
+              <input className={formInput} name="model" type='text'  onChange={this.handleChange} value={model} />
+            </div>
+              <div className={formSubDiv}>  
+              <label className={formLabel} htmlFor="year">Car Year:</label>
+              <input className={formInput} name="year" type='text' onChange={this.handleChange} value={year} />
+            </div>
+            <div className={formSubDiv}>
+              <label className={formLabel} htmlFor="price">Car Price:</label>
+              <input className={formInput} name="price" type='text' onChange={this.handleChange} value={price} />
+            </div>
+            <div className={formSubDiv}>
+              <label className={formLabel} htmlFor="color">Car Color:</label>
+              <input className={formInput} name="color" type='text' onChange={this.handleChange} value={color} />
+            </div>
+            <div className={formSubDiv}>
+              <label className={formLabel} htmlFor="quantity">Car Quantity:</label>
+              <input className={formInput} name="quantity" type='text' onChange={this.handleChange} value={quantity} />
+            </div>
+            <div className={formSubDiv}>
+              <label className={formLabel} htmlFor="description">Car description:</label>
+              <input className={formInput} name="description" type='text' onChange={this.handleChange} value={description} />
+            </div>
+            <div className={formLastDiv}>
+              <button className={buttons} type="submit">Submit</button>
+              <Link className={buttons} to="/cars" >Cancel</Link>
+            </div>
+          </form>
+        </div>
+      </motion.div>
     );
   }
 }
