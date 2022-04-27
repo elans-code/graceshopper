@@ -46,9 +46,11 @@ class Cart extends React.Component{
         let cartTotal = 0
         let numberOfItems = 0
         return (
-            <div className='flex flex-col'>
-                <div className='flex justify-center'><h1 className=' text-3xl'>{username ? username : "guest"}'s cart</h1></div>
-                <div className='flex flex-col'>
+            <div className='flex flex-col justify-center'>
+                <div className='flex justify-center'>
+                    <h1 className=' text-3xl'>{username ? username : "guest"}'s cart</h1>
+                </div>
+                <div className='flex flex-row justify-center'>
                 {
                     cartdata ?
                     cartdata.map
@@ -59,11 +61,11 @@ class Cart extends React.Component{
                                 numberOfItems = numberOfItems + cartItem.quantity
                                 return (
                                 <div className='flex flex-col justify-center' key={cartItem.item.id}>
-                                    <div className='flex flex-col justify-center'><h2>{cartItem.item.name}</h2></div>
-                                    <div className='flex flex-col justify-center'><img className='w-96 h-52' src={cartItem.item.imageUrl}/></div>
-                                    <div className='flex flex-col justify-center'><h2 className='text-center'>Price: {cartItem.item.price}</h2></div>
-                                    <div className='flex flex-col justify-center'><h2 className='text-center'>Quantity: {cartItem.quantity} </h2><input type='number' value={cartItem.quantity} name={cartItem.item.id} onChange={(e)=>{this.handleQuantity(e,cartItem.item)}}/></div>
-                                    <div className='flex flex-col justify-center'><button className={buttons} type='button' onClick={()=>{this.handleRemoveItem(cartItem.item.id)}}>Remove Item</button></div>
+                                    <div className='flex justify-center'><h2>{cartItem.item.name}</h2></div>
+                                    <div className='flex justify-center'><img className='w-96 h-52 justify-center m-2' src={cartItem.item.imageUrl}/></div>
+                                    <div className='flex justify-center'><h2 className='text-center m-2'>Price: {cartItem.item.price}</h2></div>
+                                    <div className='flex justify-center flex-row'><h2 className='text-center m-2'>Quantity: {cartItem.quantity} </h2><input type='number' value={cartItem.quantity} name={cartItem.item.id} onChange={(e)=>{this.handleQuantity(e,cartItem.item)}}/></div>
+                                    <div className='flex justify-center m-2'><button className={buttons} type='button' onClick={()=>{this.handleRemoveItem(cartItem.item.id)}}>Remove Item</button></div>
                                 </div>
                                 )
                             }
@@ -72,10 +74,11 @@ class Cart extends React.Component{
                     : "Theres nothing in the cart"
                 }
                 </div>
-                <div><h2>Number of items in cart: {numberOfItems}</h2></div>
-                <div><h2>Subtotal: {cartTotal}</h2></div>
-                <div><button className={ buttons } type='button' onClick={()=> (this.handleCheckout(cartdata, numberOfItems, cartTotal, this.props.auth))}> Checkout</button> </div>
-
+                <div className='flex flex-col justify-center m-2'>
+                    <div className='flex justify-center'><h2>Number of items in cart: {numberOfItems}</h2></div>
+                    <div className='flex justify-center'><h2>Subtotal: {cartTotal}</h2></div>
+                    <div className='flex justify-center'><button className={ buttons } type='button' onClick={()=> (this.handleCheckout(cartdata, numberOfItems, cartTotal, this.props.auth))}> Checkout</button> </div>
+                </div>
             </div>
         )
     };
