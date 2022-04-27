@@ -29,7 +29,7 @@ export const fetchOrders = (id) => {
 
 export const addToOrders = ( item, quantity , price, userId, history) => {
   return async (dispatch) => {
-    const car = { item: `${item}`,  quantity, price: price, userId: userId}
+    const car = { item: item,  quantity, price: price, userId: userId}
     const { data } = await axios.post(`/api/orders/`, car);
     dispatch(_addOrder(data));
     history.push('./checkout')

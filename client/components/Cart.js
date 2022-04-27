@@ -20,8 +20,7 @@ class Cart extends React.Component{
         this.handleCheckout = this.handleCheckout.bind(this)
     }
     handleCheckout(cartdata, quantity, price, userId){
-        console.log("PRICE", price)
-        console.log("ID", userId)
+        console.log("CARTDATA!", cartdata)
         this.props.addToOrders(cartdata, quantity, price, userId)
         this.props.emptyCart(cartdata,userId)
         //checkout with payment processor
