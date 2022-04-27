@@ -54,7 +54,7 @@ export const createCar = (car, history) => {
         },
       });
       dispatch(_createCar(data));
-      history.push("./");
+      history.push('/cars')
     }
   };
 };

@@ -55,7 +55,6 @@ class EditCar extends React.Component {
     event.preventDefault();
     // this.props.updateCar({ ...this.props.carData, ...this.state });
     this.props.updateSingleCar({ ...this.props.carData, ...this.state });
-    <Redirect to="/cars"/>
   }
 
   render() {
@@ -108,7 +107,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, {history}) => ({
   fetchCar: (id) => dispatch(fetchCar(id)),
   // updateCar: (car) => dispatch(updateCar(car, history)),
-  updateSingleCar: (car) => dispatch(updateSingleCar(car)),
+  updateSingleCar: (car) => dispatch(updateSingleCar(car, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditCar);

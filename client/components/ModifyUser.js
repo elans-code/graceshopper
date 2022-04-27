@@ -24,7 +24,6 @@ class ModifyUser extends React.Component{
     }
     handleSubmit(event) {
         event.preventDefault()
-        console.log(this.props)
         const userData = this.props.userData
         const modifiedUser = {
             id: userData.id,
@@ -34,7 +33,6 @@ class ModifyUser extends React.Component{
         this.props.modifyUser(modifiedUser)
     }
     handleChange(event){
-        console.log('Current state:',this.state);
         this.setState({[event.target.name]:event.target.value})
     }
     render(){

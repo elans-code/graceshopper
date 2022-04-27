@@ -11,6 +11,7 @@ class SingleUserView extends React.Component {
 
   render() {
     const user = this.props.userData;
+    console.log(user)
     return (
       <div>
         {user ? (
@@ -18,10 +19,10 @@ class SingleUserView extends React.Component {
             <h1>{user.name}</h1>
             <h2>{user.email}</h2>
             <h3>{user.dateOfBirth}</h3>
-           <div> <Link to={`/user/modify/${user.id}`}>Modify {user.name}</Link></div>
-           <div><Link to={`/orders/${user.id}`}>Order History</Link></div>
+           <div> <Link to={`/user/modify/${this.props.match.params.id}`}>Modify {user.name}</Link></div>
+           <div><Link to={`/orders/${this.props.match.params.id}`}>Order History</Link></div>
            <div> <button
-              onClick={() => this.props.deleteUserData(user.id)}
+              onClick={() => this.props.deleteUserData(this.props.match.params.id)}
               type="submit"
             >
               Remove

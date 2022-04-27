@@ -23,7 +23,6 @@ const _addOrder = (orders) => {
 export const fetchOrders = (id) => {
   return async (dispatch) => {
       const {data} = await axios.get(`/api/orders/${id}`)
-      console.log("HELLO!", data)
       dispatch(_setOrders(data))
   }
 }

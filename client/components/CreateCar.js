@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createCar } from "../store/allCarsStore";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class CreateCar extends React.Component {
   constructor() {
@@ -29,6 +29,7 @@ class CreateCar extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.createCar({ ...this.state});
+    <Redirect to='/cars' />
   }
 
   render() {

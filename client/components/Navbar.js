@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 
 const Navbar = ({ handleClick, isLoggedIn, userId, isAdmin }) => {
   const [isOpen, setOpen] = useState(false)
-  //console.log(this.props);
   return (
     <motion.div 
       className="

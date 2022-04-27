@@ -26,7 +26,6 @@ class Cart extends React.Component{
     }
     handleRemoveItem(item){
         if(!!this.props.auth){
-            console.log(this.props.auth)
             this.props.removeItemFromCart(item, this.props.cart, this.props.auth)
         }else{
             this.props.removeItemFromCart(item, this.props.cart, -1)

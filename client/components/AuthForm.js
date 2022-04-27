@@ -46,7 +46,7 @@ const AuthForm = (props) => {
           <div className={formLastDiv}>
             <button className={buttons} type="submit">{displayName}</button>
           </div>
-          {error && error.response && <div> {error.response.data} </div>}
+          {error && error.response && <div className={formLastDiv}> {error.response.data} </div>}
         </form>
       </div>
     </motion.div>

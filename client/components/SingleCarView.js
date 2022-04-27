@@ -20,7 +20,6 @@ class SingleCarView extends React.Component{
     }
     render(){
         const cardata = this.props.cardata
-        console.log(cardata)
         return (
             <div>{ cardata ? 
                 (<div>

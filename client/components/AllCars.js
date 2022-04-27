@@ -32,7 +32,6 @@ class AllCars extends React.Component {
     return (
       <div className="flex flex-col justify-center">
         {/* if admin, then render the link to CreateCar component otherwise don't */}
-        {console.log("yo!!!!", this.props)}
         {this.props.isAdmin ? (
           <div className="flex justify-center m-2">
             <div className="flex flex-col w-1/8 border-2 border-blue-900 p-2 rounded-3xl">
@@ -91,9 +90,6 @@ class AllCars extends React.Component {
                   <motion.button
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
-                    onTap={{
-
-                    }}
                     className={buttons}
                     type="submit"
                     onClick={() => this.handleClick(car)}
@@ -106,9 +102,6 @@ class AllCars extends React.Component {
                     <motion.button
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
-                    onTap={{
-
-                    }}
                     className={buttons}
                       type="submit"
                       onClick={() => this.props.deleteCar(car.id)}
