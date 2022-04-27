@@ -31,6 +31,7 @@ class Routes extends Component {
       <div className="border-none">
         {isLoggedIn ? (
           <Switch>
+            <Route exact path="/" component={AllCars} />
             <Route path="/home" component={AllCars} />
             <Route exact path="/cars" component={AllCars} />
             <Route exact path="/cars/:id" component={SingleCarView} />
