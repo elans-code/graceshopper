@@ -779,8 +779,20 @@ select {
   height: 12rem;
 }
 
+.h-44 {
+  height: 11rem;
+}
+
+.h-52 {
+  height: 13rem;
+}
+
 .w-80 {
   width: 20rem;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .w-1\/4 {
@@ -793,6 +805,10 @@ select {
 
 .w-3\/4 {
   width: 75%;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .shrink {
@@ -853,16 +869,16 @@ select {
   white-space: nowrap;
 }
 
-.rounded-3xl {
-  border-radius: 1.5rem;
-}
-
 .rounded-xl {
   border-radius: 0.75rem;
 }
 
 .rounded-full {
   border-radius: 9999px;
+}
+
+.rounded-3xl {
+  border-radius: 1.5rem;
 }
 
 .rounded-b-full {
@@ -896,11 +912,6 @@ select {
   padding: 0.5rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -909,6 +920,11 @@ select {
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .text-center {
@@ -922,6 +938,11 @@ select {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .font-extrabold {

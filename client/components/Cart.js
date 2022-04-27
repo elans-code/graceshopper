@@ -46,9 +46,9 @@ class Cart extends React.Component{
         let cartTotal = 0
         let numberOfItems = 0
         return (
-            <div>
-                <div><h1>{username ? username : "guest"}'s cart</h1></div>
-                <div>
+            <div className='flex flex-col'>
+                <div className='flex justify-center'><h1 className=' text-3xl'>{username ? username : "guest"}'s cart</h1></div>
+                <div className='flex flex-col'>
                 {
                     cartdata ?
                     cartdata.map
@@ -58,12 +58,12 @@ class Cart extends React.Component{
                                 cartTotal += cartItem.item.price * cartItem.quantity
                                 numberOfItems = numberOfItems + cartItem.quantity
                                 return (
-                                <div key={cartItem.item.id}>
-                                    <div><h2>{cartItem.item.name}</h2></div>
-                                    <div><img src={cartItem.item.imageUrl}/></div>
-                                    <div><h2>Price: {cartItem.item.price}</h2></div>
-                                    <div><h2>Quantity: {cartItem.quantity} </h2><input type='number' value={cartItem.quantity} name={cartItem.item.id} onChange={(e)=>{this.handleQuantity(e,cartItem.item)}}/></div>
-                                    <div><button className={buttons} type='button' onClick={()=>{this.handleRemoveItem(cartItem.item.id)}}>Remove Item</button></div>
+                                <div className='flex flex-col justify-center' key={cartItem.item.id}>
+                                    <div className='flex flex-col justify-center'><h2>{cartItem.item.name}</h2></div>
+                                    <div className='flex flex-col justify-center'><img className='w-96 h-52' src={cartItem.item.imageUrl}/></div>
+                                    <div className='flex flex-col justify-center'><h2 className='text-center'>Price: {cartItem.item.price}</h2></div>
+                                    <div className='flex flex-col justify-center'><h2 className='text-center'>Quantity: {cartItem.quantity} </h2><input type='number' value={cartItem.quantity} name={cartItem.item.id} onChange={(e)=>{this.handleQuantity(e,cartItem.item)}}/></div>
+                                    <div className='flex flex-col justify-center'><button className={buttons} type='button' onClick={()=>{this.handleRemoveItem(cartItem.item.id)}}>Remove Item</button></div>
                                 </div>
                                 )
                             }
