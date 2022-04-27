@@ -23,14 +23,14 @@ const _addOrder = (orders) => {
 export const fetchOrders = (id) => {
   return async (dispatch) => {
       const {data} = await axios.get(`/api/orders/${id}`)
-      console.log("HELLO!", data)
       dispatch(_setOrders(data))
   }
 }
 
-export const addToOrders = (order, userId, history) => {
+export const addToOrders = ( quantity , price, userId, history) => {
   return async (dispatch) => {
-    const { data } = await axios.post(`/api/orders/${userId}`, order.item);
+    const car = { quantity: quantity, price: price, userId: userId}
+    const { data } = await axios.post(`/api/orders/`, car);
     dispatch(_addOrder(data));
     history.push('./checkout')
   };
