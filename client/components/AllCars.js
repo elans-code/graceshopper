@@ -98,7 +98,7 @@ class AllCars extends React.Component {
                   </motion.button>
                 </div>
                 {this.props.isAdmin ? (
-                  <div>
+                  <div className="flex flex-row justify-around">
                     <motion.button
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
@@ -108,7 +108,19 @@ class AllCars extends React.Component {
                     >
                       Remove
                     </motion.button>
+                    <Link to={`/cars/edit/${car.id}`}>
+                      <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.8 }}
+                      className={buttons}
+                        type="submit"
+                        
+                      >
+                        Edit
+                      </motion.button>
+                    </Link>
                   </div>
+                  
                 ) : (
                   <></>
                 )}
