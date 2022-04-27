@@ -21,19 +21,19 @@ class SingleCarView extends React.Component{
     render(){
         const cardata = this.props.cardata
         return (
-            <div>{ cardata ? 
-                (<div>
+            <div className='flex flex-col'>{ cardata ? 
+                (<div className='flex flex-col justify-center'>
                     {this.props.isAdmin? <h2>ADMIN VIEW</h2> : <></>}
-                    <div><h1>{cardata.year} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></div>
-                    <div><img src= {cardata.imageUrl}/></div>
-                    <div><h2>Year: {cardata.year}</h2></div>
-                    <div><h2>Make: {cardata.make}</h2></div>
-                    <div><h2>Model: {cardata.model}</h2></div>
-                    <div><h2>Color: {cardata.color}</h2></div>
-                    <div><h2>Price: {cardata.price}</h2></div>
-                    <div><h2>Description: {cardata.description}</h2></div>
-                    <div><h2>Stock: {cardata.quantity}</h2></div>
-                    <div><button type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</button></div>
+                    <div className='flex justify-center'><h1>{cardata.year} {cardata ? cardata.make : 'Loading make'} {cardata ? cardata.model : 'Loading model'}</h1></div>
+                    <div className='flex justify-center'><img className='w-1/4' src= {cardata.imageUrl}/></div>
+                    <div className='flex justify-center'><h2>Year: {cardata.year}</h2></div>
+                    <div className='flex justify-center'><h2>Make: {cardata.make}</h2></div>
+                    <div className='flex justify-center'><h2>Model: {cardata.model}</h2></div>
+                    <div className='flex justify-center'><h2>Color: {cardata.color}</h2></div>
+                    <div className='flex justify-center'><h2>Price: {cardata.price}</h2></div>
+                    <div className='flex justify-center'><h2 className=''>Description: {cardata.description}</h2></div>
+                    <div className='flex justify-center'><h2>Stock: {cardata.quantity}</h2></div>
+                    <div className='flex justify-center'><button type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</button></div>
                     {this.props.isAdmin? (
                     <div><Link to={`/cars/edit/${cardata.id}`} >Edit</Link></div>
                     ) : (

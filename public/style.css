@@ -783,10 +783,6 @@ select {
   height: 13rem;
 }
 
-.h-44 {
-  height: 11rem;
-}
-
 .w-80 {
   width: 20rem;
 }
@@ -805,10 +801,6 @@ select {
 
 .w-3\/4 {
   width: 75%;
-}
-
-.w-1\/2 {
-  width: 50%;
 }
 
 .shrink {
@@ -867,6 +859,10 @@ select {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.text-clip {
+  text-overflow: clip;
 }
 
 .rounded-3xl {

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { modifyCartQuantity, removeAllFromCart, removeFromCart } from '../store/cartStore'
 import { addToOrders } from '../store/orderStore'
 import { buttons } from '../styleClassNames'
+import { motion } from 'framer-motion'
 /**
  * COMPONENT
  */
@@ -59,14 +60,33 @@ class Cart extends React.Component{
                             if(!!cartItem.item){
                                 cartTotal += cartItem.item.price * cartItem.quantity
                                 numberOfItems = numberOfItems + cartItem.quantity
+                                const randomX = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+                                const randomy = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+                                const randomDelay = Math.floor(Math.random()*.4)
                                 return (
-                                <div className='flex flex-col justify-center' key={cartItem.item.id}>
+                                <motion.div
+                                initial={{
+                                    opacity: 0,
+                                    x:`${randomX}`,
+                                    y:`${randomy}`,
+                                    scale: 0
+                                  }}
+                                  whileInView={{
+                                    opacity: 1,
+                                    x:0,
+                                    y:0,
+                                    scale: 1
+                                  }}
+                                  transition={{
+                                    delay: randomDelay
+                                  }}
+                                 className='flex flex-col justify-center border-blue-900 border-2 rounded-3xl m-2' key={cartItem.item.id}>
                                     <div className='flex justify-center'><h2>{cartItem.item.name}</h2></div>
                                     <div className='flex justify-center'><img className='w-96 h-52 justify-center m-2' src={cartItem.item.imageUrl}/></div>
                                     <div className='flex justify-center'><h2 className='text-center m-2'>Price: {cartItem.item.price}</h2></div>
                                     <div className='flex justify-center flex-row'><h2 className='text-center m-2'>Quantity: {cartItem.quantity} </h2><input type='number' value={cartItem.quantity} name={cartItem.item.id} onChange={(e)=>{this.handleQuantity(e,cartItem.item)}}/></div>
                                     <div className='flex justify-center m-2'><button className={buttons} type='button' onClick={()=>{this.handleRemoveItem(cartItem.item.id)}}>Remove Item</button></div>
-                                </div>
+                                </motion.div>
                                 )
                             }
                         }
