@@ -52,7 +52,7 @@ const Navbar = ({ handleClick, isLoggedIn, userId, isAdmin }) => {
             <Link className="mx-2" to="/cart">Cart</Link>
           </div>
         ) : (
-          <div>
+          <div className="flex justify-center border-none">
             {/* The navbar will show these links before you log in */}
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>

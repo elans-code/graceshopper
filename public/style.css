@@ -850,10 +850,6 @@ select {
   border-width: 2px;
 }
 
-.border-0 {
-  border-width: 0px;
-}
-
 .border {
   border-width: 1px;
 }
