@@ -54,10 +54,10 @@ const Navbar = ({ handleClick, isLoggedIn, userId, isAdmin }) => {
         ) : (
           <div className="flex justify-center border-none">
             {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/cars">Store</Link>
-            <Link to="/cart">Cart</Link>
+            <Link className="mx-2" to="/login">Login</Link>
+            <Link className="mx-2" to="/signup">Sign Up</Link>
+            <Link className="mx-2" to="/cars">Store</Link>
+            <Link className="mx-2" to="/cart">Cart</Link>
           </div>
         )}
       </nav>
