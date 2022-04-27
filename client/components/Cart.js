@@ -19,8 +19,10 @@ class Cart extends React.Component{
         this.handleQuantity = this.handleQuantity.bind(this)
         this.handleCheckout = this.handleCheckout.bind(this)
     }
-    handleCheckout(cartdata, userId){
-        this.props.addToOrders(cartdata, userId)
+    handleCheckout(cartdata, quantity, price, userId){
+        console.log("PRICE", price)
+        console.log("ID", userId)
+        this.props.addToOrders(cartdata, quantity, price, userId)
         this.props.emptyCart(cartdata,userId)
         //checkout with payment processor
     }
@@ -73,7 +75,8 @@ class Cart extends React.Component{
                 </div>
                 <div><h2>Number of items in cart: {numberOfItems}</h2></div>
                 <div><h2>Subtotal: {cartTotal}</h2></div>
-                <div><button className={ buttons } type='button' onClick={()=> (this.handleCheckout(cartdata, cartdata[0].quantity))}> Checkout</button> </div>
+                <div><button className={ buttons } type='button' onClick={()=> (this.handleCheckout(cartdata, numberOfItems, cartTotal, this.props.auth))}> Checkout</button> </div>
+
             </div>
         )
     };
@@ -93,7 +96,7 @@ const mapDispatch = (dispatch, {history}) =>{
     return{
         removeItemFromCart: (item,cart,userId) => dispatch(removeFromCart(item, cart, userId)),
         modifyCartItemQuantity: (item,value,cart) => dispatch(modifyCartQuantity(item,value,cart)),
-        addToOrders:(order, userId) => dispatch(addToOrders(order, userId, history)),
+        addToOrders:(item, quantity, price, userId) => dispatch(addToOrders(item, quantity, price, userId, history)),
         emptyCart: (cart,userId)=> dispatch(removeAllFromCart(cart,userId))
     }
 }

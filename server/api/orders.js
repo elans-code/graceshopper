@@ -16,20 +16,23 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const orders = await Order.findByPk(req.params.id);
+    const orders = await Order.findAll({
+      where: {
+      userId: req.params.id,
+     },
+   });
     res.json(orders);
   } catch (error) {
     next(error);
   }
 });
 
-router.post("/:id", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
+
   try {
-      const createOrder = await Order.create(req.body, {
-        where: {
-          userId: req.params.id,
-        },
-      });
+
+      const createOrder = await Order.create({item: req.body.item, quantity: req.body.quantity, price: req.body.price, userId: req.body.userId })
+
     res.json(createOrder);
   } catch (error) {
     next(error);
