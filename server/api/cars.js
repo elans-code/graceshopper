@@ -6,7 +6,6 @@ module.exports = router;
 
 const requireToken = async (req, res, next) => {
   try {
-    console.log(req.headers.authorization);
     const userData = await User.findByToken(req.headers.authorization);
     req.user = userData;
     next();
@@ -27,7 +26,7 @@ router.get("/", async (req, res, next) => {
 
 router.put("/update/:id", requireToken, async (req, res, next) => {
   try {
-    if (req.user.admin) {
+    if (req.user.dataValues.admin) {
       await Car.update(req.body, {
         where: {
           id: req.params.id,
@@ -55,7 +54,7 @@ router.get("/:id", async (req, res, next) => {
 // Add new car listing
 router.post("/", requireToken, async (req, res, next) => {
   try {
-    if (req.user.admin) {
+    if (req.user.dataValues.admin) {
       res.status(201).send(await Car.create(req.body));
     } else {
       return res.status(403).send("You shall not pass!");
@@ -68,7 +67,7 @@ router.post("/", requireToken, async (req, res, next) => {
 // Update a car listing
 router.put("/:id", requireToken, async (req, res, next) => {
   try {
-    if (req.user.admin) {
+    if (req.user.dataValues.admin) {
       const singleCar = await Car.findByPk(req.params.id);
       res.send(await singleCar.update(req.body));
     } else {
@@ -82,7 +81,7 @@ router.put("/:id", requireToken, async (req, res, next) => {
 // Delete a car listing
 router.delete("/:id",requireToken, async (req, res, next) => {
   try {
-    if (req.user.admin) {
+    if (req.user.dataValues.admin) {
       const carToDelete = await Car.findByPk(req.params.id);
       await carToDelete.destroy();
       res.send(carToDelete);

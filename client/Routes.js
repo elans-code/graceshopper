@@ -28,9 +28,10 @@ class Routes extends Component {
     const { isLoggedIn, userId, isAdmin } = this.props;
     // userId ? console.log(userId) : console.log('no userid')
     return (
-      <div>
+      <div className="border-none">
         {isLoggedIn ? (
           <Switch>
+            <Route exact path="/" component={AllCars} />
             <Route path="/home" component={AllCars} />
             <Route exact path="/cars" component={AllCars} />
             <Route exact path="/cars/:id" component={SingleCarView} />

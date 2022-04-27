@@ -7,21 +7,12 @@ import { Link } from "react-router-dom";
 class OrderHistory extends React.Component {
   componentDidMount() {
     this.props.getOrders(this.props.match.params.id);
-    // console.log("ORDERS!!",this.props.orders)
   }
 
 
 
   render() {
     const orders = this.props.orders
-    console.log("ORDERS!!!!", orders)
-    // return (
-    //   <div> { orders ?
-    //     (<div> <p>Order: {orders.item} </p>
-    //     <p> Price: {orders.price} </p>
-    //     </div>) :  'No Previous Orders' }
-    //     </div>
-    // )
     return (
       <div> { orders ?
         (<div>

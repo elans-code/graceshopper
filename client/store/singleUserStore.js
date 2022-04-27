@@ -43,8 +43,7 @@ export const editUser = (user) => {
         // history.push(`/user/modify/${user.id}`)
       }
     } catch (error) {
-      // next(error)
-      console.log(error);
+      next(error)
     }
   };
 };

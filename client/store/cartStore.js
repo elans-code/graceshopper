@@ -46,7 +46,6 @@ export const fetchCart = (userId) => {
 
 export const updateCart = (cart, userId) => {
   return async (dispatch) => {
-    console.log('cart',cart,' user',userId)
     await axios.put(`/api/cart/${userId}`, cart);
     //dispatch(_updateCart(data));
   };
@@ -89,7 +88,6 @@ export const removeFromCart = (item, cart, userId) => {
         return e.item.id !== item
       }
     })
-    console.log(userId)
     if(userId>0){
       dispatch(updateCart(newCart,userId))
       dispatch(_setCart(newCart))
@@ -105,7 +103,6 @@ export const removeAllFromCart = (cart, userId) => {
         return e.item.id == -1
       }
     })
-    console.log(userId)
     if(userId>0){
       dispatch(updateCart(newCart,userId))
       dispatch(_setCart(newCart))

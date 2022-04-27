@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { createUser } from "../store/allUsersStore";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { buttons, formInput, formLabel, formLastDiv, forms, formSubDiv, formTitle, maindiv1, maindiv2 } from "../styleClassNames";
 
 
 class Registration extends Component {
@@ -36,31 +38,56 @@ class Registration extends Component {
   render() {
     const { name, password, email, dateOfBirth } = this.state;
     const { handleSubmit } = this;
-
+    const randomX = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+    const randomy = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+    const randomDelay = Math.floor(Math.random()*1.5)
     return (
-      <div className="flex justify-center">
-        <div className="addUser flex flex-col justify-center">
+      <motion.div
+        initial={{
+          opacity: 0,
+          x:`${randomX}`,
+          y:`${randomy}`,
+          scale: 0
+        }}
+        whileInView={{
+          opacity: 1,
+          x:0,
+          y:0,
+          scale: 1
+        }}
+        transition={{
+          delay: randomDelay
+        }}
+       className={maindiv1}>
+        <div className={maindiv2}>
           <div>
-            <div className="actionHeader"> Register User</div>
+            <div className={formTitle}> Register User</div>
           </div>
-          <form id="addUser-form" onSubmit={handleSubmit}>
-            <label htmlFor="name">Name:</label>
-            <input name="name" type="text" value={name} onChange={this.handleChange} />
-
-            <label htmlFor="password">Password:</label>
-            <input name="password" type="password"value={password} onChange={this.handleChange} />
-
-            <label htmlFor="email">Email:</label>
-            <input name="email" type="email" value={email} onChange={this.handleChange} />
-
-            <label htmlFor="dateOfBirth">Date of Birth:</label>
-            <input name="dateOfBirth" type="date" value={dateOfBirth} onChange={this.handleChange} />
+            <form className={forms} id="addUser-form" onSubmit={handleSubmit}>
+              <div className={formSubDiv}>
+                <label className={formLabel} htmlFor="name">Name:</label>
+                <input className={formInput} name="name" type="text" value={name} onChange={this.handleChange} />
+              </div>
+              <div className={formSubDiv}>
+                <label className={formLabel} htmlFor="password">Password:</label>
+                <input className={formInput}  name="password" type="password"value={password} onChange={this.handleChange} />
+              </div>
+              <div className={formSubDiv}>
+                <label className={formLabel} htmlFor="email">Email:</label>
+                <input className={formInput} name="email" type="email" value={email} onChange={this.handleChange} />
+              </div>
+              <div className={formSubDiv}>
+                <label className={formLabel} htmlFor="dateOfBirth">Date of Birth:</label>
+                <input className={formInput} name="dateOfBirth" type="date" value={dateOfBirth} onChange={this.handleChange} />
+              </div>
+              <div className={formLastDiv}>
+                <button className={buttons} type="submit">Submit</button>
+                <Link className={buttons} to="/">Cancel</Link>
+              </div>
             
-            <button type="submit">Submit</button>
-            <Link to="/">Cancel</Link>
           </form>
         </div>
-      </div>
+      </motion.div>
     );
   }
 }

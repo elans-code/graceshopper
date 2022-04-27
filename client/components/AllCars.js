@@ -9,6 +9,7 @@ import {
 } from "../store/cartStore";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { buttons } from "../styleClassNames";
 
 class AllCars extends React.Component {
   constructor() {
@@ -31,11 +32,12 @@ class AllCars extends React.Component {
     return (
       <div className="flex flex-col justify-center">
         {/* if admin, then render the link to CreateCar component otherwise don't */}
-        {console.log("yo!!!!", this.props)}
         {this.props.isAdmin ? (
-          <div>
-            <h2>ADMIN VIEW</h2>
-            <Link to="/cars/modify/create">Add New Car</Link>
+          <div className="flex justify-center m-2">
+            <div className="flex flex-col w-1/8 border-2 border-blue-900 p-2 rounded-3xl">
+              <h2 className="text-center text-xl">ADMIN OPTIONS</h2>
+              <Link className="text-center" to="/cars/modify/create">Add New Car</Link>
+            </div>
           </div>
         ) : (
           <></>
@@ -43,8 +45,26 @@ class AllCars extends React.Component {
         <div className="flex flex-row flex-wrap justify-center">
           {/* <div> */}
           {this.props.cars.map((car) => {
+            const randomX = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+            const randomy = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+            const randomDelay = Math.floor(Math.random()*.4)
             return (
               <motion.div
+                initial={{
+                  opacity: 0,
+                  x:`${randomX}`,
+                  y:`${randomy}`,
+                  scale: 0
+                }}
+                whileInView={{
+                  opacity: 1,
+                  x:0,
+                  y:0,
+                  scale: 1
+                }}
+                transition={{
+                  delay: randomDelay
+                }}
                 key={car.id}
                 className="flex flex-col justify-center border-2 border-blue-900 rounded-xl m-2 p-2"
               >
@@ -52,12 +72,10 @@ class AllCars extends React.Component {
                   <div className="flex flex-col justify-center text-center items-center">
                     <motion.img
                       whileHover={{ scale: 2 }}
-                      className="rounded-xl"
+                      className="rounded-xl w-80 h-48"
                       src={car.imageUrl}
-                      width="250"
-                      height="250"
                     />
-                    <p>
+                    <p className="truncate w-80">
                       {car.make} {car.model} ({car.year})
                     </p>
                     <p>
@@ -72,7 +90,7 @@ class AllCars extends React.Component {
                   <motion.button
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
-                    className="border-2 border-blue-900 px-4 py-2 rounded-full hover:bg-blue-900 hover:text-white"
+                    className={buttons}
                     type="submit"
                     onClick={() => this.handleClick(car)}
                   >
@@ -80,14 +98,29 @@ class AllCars extends React.Component {
                   </motion.button>
                 </div>
                 {this.props.isAdmin ? (
-                  <div>
-                    <button
+                  <div className="flex flex-row justify-around">
+                    <motion.button
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
+                    className={buttons}
                       type="submit"
                       onClick={() => this.props.deleteCar(car.id)}
                     >
                       Remove
-                    </button>
+                    </motion.button>
+                    <Link to={`/cars/edit/${car.id}`}>
+                      <motion.button
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.8 }}
+                      className={buttons}
+                        type="submit"
+                        
+                      >
+                        Edit
+                      </motion.button>
+                    </Link>
                   </div>
+                  
                 ) : (
                   <></>
                 )}

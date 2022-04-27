@@ -12,7 +12,6 @@ router.get("/:id", async (req, res, next) => {
           userId: req.params.id,
         },
       });
-      console.log(items)
       res.json(items);
     } else {
       res.send(window.localStorage.getItem("Cart", req.body));
@@ -26,7 +25,6 @@ router.put("/:id", async (req, res, next) => {
   try {
     let newItems = req.body ?? null
     const query = await Cart.upsert({items: newItems, userId: req.params.id})
-    console.log('req.body: ',newItems)
     res.status(200).send();
   } catch (error) {
     next(error);

@@ -6,7 +6,6 @@ module.exports = router;
 
 const requireToken = async (req, res, next) => {
   try {
-    console.log(req.headers.authorization);
     const userData = await User.findByToken(req.headers.authorization);
     req.user = userData;
     next();
@@ -42,7 +41,7 @@ router.get("/:id", requireToken, async (req, res, next) => {
   }
 });
 
-router.post("/", requireToken, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await User.create(req.body));
   } catch (error) {
@@ -52,9 +51,9 @@ router.post("/", requireToken, async (req, res, next) => {
 
 router.get("/", requireToken, async (req, res, next) => {
   try {
-    if (req.user.admin) {
+    if (req.user.dataValues.admin) {
       let users = await User.findAll({
-        attributes: ["name", "email", "dateOfBirth"],
+        attributes: ["id","name", "email", "dateOfBirth"],
       });
       res.json(users);
     } else {
@@ -67,7 +66,7 @@ router.get("/", requireToken, async (req, res, next) => {
 
 router.delete("/:id", requireToken, async (req, res, next) => {
   try {
-    if (req.user.admin) {
+    if (req.user.dataValues.admin) {
       const userToDelete = await User.findByPk(req.params.id);
       await userToDelete.destroy();
       res.send(userToDelete);

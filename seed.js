@@ -79,6 +79,24 @@ const users = [
     password: "123456789",
     dateOfBirth: new Date("01/01/1965"),
   },
+  {
+    name: "Joe",
+    email: "Joe@gmail.com",
+    password: "123456789",
+    dateOfBirth: new Date("01/01/1965"),
+  },
+  {
+    name: "popeye",
+    email: "popeye@gmail.com",
+    password: "123456789",
+    dateOfBirth: new Date("01/01/1965"),
+  },
+  {
+    name: "Amanda",
+    email: "amanda@gmail.com",
+    password: "123456789",
+    dateOfBirth: new Date("01/01/1965"),
+  },
 ];
 
 const orders = [
@@ -94,13 +112,23 @@ const orders = [
 
 const carts = [
   {
-    item: "CAR",
-    price: "2500",
+    items: [{"item":{"id":14,"year":2007,"make":"Lamborghini","model":"Gallardo Spyder","color":"Yellow","description":"The 2007 Lamborghini Gallardo Spyder has a sharp design with a lot of interior and exterior space. It's one of the best cars around, but it's not leaving the competition in the dust.","price":10136,"quantity":22,"imageUrl":"http://www.regcheck.org.uk/image.aspx/@MjAwNyBMYW1ib3JnaGluaSBHYWxsYXJkbyBTcHlkZXI=","createdAt":"2022-04-26T19:44:06.363Z","updatedAt":"2022-04-26T19:44:06.363Z","orderId":null},"quantity":1}],
     userId: 2,
   },
   {
-    item: "OTHER CAR",
-    price: "100",
+    items: [{"item":{"id":14,"year":2007,"make":"Lamborghini","model":"Gallardo Spyder","color":"Yellow","description":"The 2007 Lamborghini Gallardo Spyder has a sharp design with a lot of interior and exterior space. It's one of the best cars around, but it's not leaving the competition in the dust.","price":10136,"quantity":22,"imageUrl":"http://www.regcheck.org.uk/image.aspx/@MjAwNyBMYW1ib3JnaGluaSBHYWxsYXJkbyBTcHlkZXI=","createdAt":"2022-04-26T19:44:06.363Z","updatedAt":"2022-04-26T19:44:06.363Z","orderId":null},"quantity":4}],
+    userId: 5,
+  },
+  {    
+    items: [{"item":{"id":14,"year":2007,"make":"Lamborghini","model":"Gallardo Spyder","color":"Yellow","description":"The 2007 Lamborghini Gallardo Spyder has a sharp design with a lot of interior and exterior space. It's one of the best cars around, but it's not leaving the competition in the dust.","price":10136,"quantity":22,"imageUrl":"http://www.regcheck.org.uk/image.aspx/@MjAwNyBMYW1ib3JnaGluaSBHYWxsYXJkbyBTcHlkZXI=","createdAt":"2022-04-26T19:44:06.363Z","updatedAt":"2022-04-26T19:44:06.363Z","orderId":null},"quantity":3}],
+    userId: 4,
+  },
+  {
+    items: [{"item":{"id":14,"year":2007,"make":"Lamborghini","model":"Gallardo Spyder","color":"Yellow","description":"The 2007 Lamborghini Gallardo Spyder has a sharp design with a lot of interior and exterior space. It's one of the best cars around, but it's not leaving the competition in the dust.","price":10136,"quantity":22,"imageUrl":"http://www.regcheck.org.uk/image.aspx/@MjAwNyBMYW1ib3JnaGluaSBHYWxsYXJkbyBTcHlkZXI=","createdAt":"2022-04-26T19:44:06.363Z","updatedAt":"2022-04-26T19:44:06.363Z","orderId":null},"quantity":2}],
+    userId: 3,
+  },
+  {
+    items: [{"item":{"id":14,"year":2007,"make":"Lamborghini","model":"Gallardo Spyder","color":"Yellow","description":"The 2007 Lamborghini Gallardo Spyder has a sharp design with a lot of interior and exterior space. It's one of the best cars around, but it's not leaving the competition in the dust.","price":10136,"quantity":22,"imageUrl":"http://www.regcheck.org.uk/image.aspx/@MjAwNyBMYW1ib3JnaGluaSBHYWxsYXJkbyBTcHlkZXI=","createdAt":"2022-04-26T19:44:06.363Z","updatedAt":"2022-04-26T19:44:06.363Z","orderId":null},"quantity":5}],
     userId: 1,
   },
 ];

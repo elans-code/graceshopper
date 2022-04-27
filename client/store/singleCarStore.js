@@ -28,7 +28,7 @@ export const fetchCar = (id) => {
   };
 };
 
-export const updateSingleCar = (car) => {
+export const updateSingleCar = (car, history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -40,9 +40,10 @@ export const updateSingleCar = (car) => {
         });
         const { data: carData } = await axios.get(`/api/cars/${car.id}`);
         dispatch(_setSingleCar(carData));
+        history.push(`/cars/${car.id}`)
       }
     } catch (error) {
-      console.log(error);
+      next(error)
     }
   };
 };

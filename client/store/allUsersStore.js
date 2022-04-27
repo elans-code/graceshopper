@@ -28,16 +28,9 @@ const deleteUser = (user) => {
 
 export const createUser = (user, history) => {
   return async (dispatch) => {
-    const token = window.localStorage.getItem(TOKEN);
-    if (token) {
-      const { data: created } = await Axios.post("/api/users", user, {
-        headers: {
-          authorization: token,
-        },
-      });
+      const { data: created } = await Axios.post("/api/users", user);
       dispatch(_createUser(created));
       history.push("/");
-    }
   };
 };
 
@@ -52,10 +45,11 @@ export const fetchUsers = () => {
           },
         });
         const data = response.data;
+        console.log(data)
         dispatch(setUsers(data));
       }
     } catch (err) {
-      console.log(err);
+      next(err)
     }
   };
 };
@@ -65,14 +59,16 @@ export const removeUser = (id, history) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       if (token) {
-        console.log('id:',id)
         const { data } = await Axios.delete(`/api/users/${id}`, {
           headers: {
             authorization: token,
           }});
         dispatch(deleteUser(data));
-        //const { newData } = await Axios.get(`/api/users`);
-        //dispatch(setUsers(newData));
+        const { data:newData } = await Axios.get(`/api/users`, {
+          headers: {
+            authorization: token,
+          }});
+        dispatch(setUsers(newData));
         history.push("/users");
       }
     } catch (err) {}
