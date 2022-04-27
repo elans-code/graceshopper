@@ -2,30 +2,54 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
+import { motion } from "framer-motion";
 
 const Navbar = ({ handleClick, isLoggedIn, userId, isAdmin }) => {
   //console.log(this.props);
-
   return (
-    <div className="nav-bar">
-      <h1>Grace Shopper Honeydew</h1>
-      <nav>
+    <motion.div 
+      className="
+      align-middle
+      bg-blue-900 
+      rounded-b-full 
+      sticky 
+      top-0 
+      border-none 
+      justify-center 
+      flex 
+      flex-col 
+      place-self-center 
+      divide-none"
+      initial={{
+        opacity: 1,
+        y:"-50"
+      }}
+      whileHover={{
+        opacity: 1,
+        y:0
+      }}
+      transition={{
+        duration: .25
+      }}
+      >
+      <h1 className="text-center font-extrabold py-4">Grace Shopper Honeydew</h1>
+      <nav className="flex flex-col justify-center mb-3 border-none">
         {isLoggedIn ? (
-          <div>
+          <div className="flex justify-center border-none">
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <Link to="/cars">Store</Link>
+            <Link className="mx-2" to="/home">Home</Link>
+            <Link className="mx-2" to="/cars">Store</Link>
             {/* <Link to="/users">Users</Link> */}
-            <a href="#" onClick={handleClick}>
+            <a className="mx-2" href="#" onClick={handleClick}>
               Logout
             </a>
-            <Link to={`/users/${userId}`}>Profile</Link>
+            <Link className="mx-2" to={`/users/${userId}`}>Profile</Link>
             {isAdmin?
             (
-            <Link to="/users">Users</Link>
+            <Link className="mx-2" to="/users">Users</Link>
             )
             :<></>}
-            <Link to="/cart">Cart</Link>
+            <Link className="mx-2" to="/cart">Cart</Link>
           </div>
         ) : (
           <div>
@@ -38,7 +62,7 @@ const Navbar = ({ handleClick, isLoggedIn, userId, isAdmin }) => {
         )}
       </nav>
       <hr />
-    </div>
+    </motion.div>
   );
 };
 

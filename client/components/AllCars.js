@@ -43,8 +43,26 @@ class AllCars extends React.Component {
         <div className="flex flex-row flex-wrap justify-center">
           {/* <div> */}
           {this.props.cars.map((car) => {
+            const randomX = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+            const randomy = Math.ceil((Math.random() < 0.5 ? -1 : 1) * (Math.random()*100))
+            const randomDelay = Math.floor(Math.random()*.4)
             return (
               <motion.div
+                initial={{
+                  opacity: 0,
+                  x:`${randomX}`,
+                  y:`${randomy}`,
+                  scale: 0
+                }}
+                whileInView={{
+                  opacity: 1,
+                  x:0,
+                  y:0,
+                  scale: 1
+                }}
+                transition={{
+                  delay: randomDelay
+                }}
                 key={car.id}
                 className="flex flex-col justify-center border-2 border-blue-900 rounded-xl m-2 p-2"
               >
@@ -52,12 +70,10 @@ class AllCars extends React.Component {
                   <div className="flex flex-col justify-center text-center items-center">
                     <motion.img
                       whileHover={{ scale: 2 }}
-                      className="rounded-xl"
+                      className="rounded-xl w-80 h-48"
                       src={car.imageUrl}
-                      width="250"
-                      height="250"
                     />
-                    <p>
+                    <p className="truncate w-80">
                       {car.make} {car.model} ({car.year})
                     </p>
                     <p>
