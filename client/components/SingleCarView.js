@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import { fetchCar } from '../store/singleCarStore'
 import { Link } from 'react-router-dom'
 import {addToCart} from '../store/cartStore'
+import { buttons } from '../styleClassNames'
 
 /**
  * COMPONENT
@@ -33,7 +34,7 @@ class SingleCarView extends React.Component{
                     <div className='flex justify-center'><h2>Price: {cardata.price}</h2></div>
                     <div className='flex justify-center'><h2 className=''>Description: {cardata.description}</h2></div>
                     <div className='flex justify-center'><h2>Stock: {cardata.quantity}</h2></div>
-                    <div className='flex justify-center'><button type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</button></div>
+                    <div className='flex justify-center'><button className={buttons} type='button' onClick={()=>{this.handleCart(cardata)}}>Add to cart</button></div>
                     {this.props.isAdmin? (
                     <div><Link to={`/cars/edit/${cardata.id}`} >Edit</Link></div>
                     ) : (
