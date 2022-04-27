@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 import { motion } from "framer-motion";
 
 const Navbar = ({ handleClick, isLoggedIn, userId, isAdmin }) => {
+  const [isOpen, setOpen] = useState(false)
   //console.log(this.props);
   return (
     <motion.div 
@@ -31,24 +32,41 @@ const Navbar = ({ handleClick, isLoggedIn, userId, isAdmin }) => {
       transition={{
         duration: .25
       }}
+      onMouseEnter={()=> setOpen(true)}
+      onMouseLeave={()=> setOpen(false)}
       >
-      <h1 className="text-center font-extrabold py-4">Grace Shopper Honeydew</h1>
-      <nav className="flex flex-col justify-center mb-3 border-none">
+
+      <motion.h1 
+      initial={{
+        scale: 1,
+        opacity: 0
+      }}
+      animate={{
+        scale: isOpen?2:1,
+        opacity: isOpen?1:0,
+        zIndex: 1
+      }} 
+      className="
+      text-center
+      font-extrabold
+      py-4
+      ">Grace Shopper Honeydew</motion.h1>
+      <nav className="flex flex-col justify-center mb-3 border-none z-10">
         {isLoggedIn ? (
           <div className="flex justify-center border-none">
             {/* The navbar will show these links after you log in */}
-            <Link className="mx-2" to="/home">Home</Link>
             <Link className="mx-2" to="/cars">Store</Link>
             {/* <Link to="/users">Users</Link> */}
-            <a className="mx-2" href="#" onClick={handleClick}>
-              Logout
-            </a>
+
             <Link className="mx-2" to={`/users/${userId}`}>Profile</Link>
             {isAdmin?
             (
             <Link className="mx-2" to="/users">Users</Link>
             )
             :<></>}
+            <a className="mx-2" href="#" onClick={handleClick}>
+              Logout
+            </a>
             <Link className="mx-2" to="/cart">Cart</Link>
           </div>
         ) : (

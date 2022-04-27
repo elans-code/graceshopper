@@ -9,6 +9,7 @@ import {
 } from "../store/cartStore";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { buttons } from "../styleClassNames";
 
 class AllCars extends React.Component {
   constructor() {
@@ -33,9 +34,11 @@ class AllCars extends React.Component {
         {/* if admin, then render the link to CreateCar component otherwise don't */}
         {console.log("yo!!!!", this.props)}
         {this.props.isAdmin ? (
-          <div>
-            <h2>ADMIN VIEW</h2>
-            <Link to="/cars/modify/create">Add New Car</Link>
+          <div className="flex justify-center m-2">
+            <div className="flex flex-col w-1/8 border-2 border-blue-900 p-2 rounded-3xl">
+              <h2 className="text-center text-xl">ADMIN OPTIONS</h2>
+              <Link className="text-center" to="/cars/modify/create">Add New Car</Link>
+            </div>
           </div>
         ) : (
           <></>
@@ -88,7 +91,10 @@ class AllCars extends React.Component {
                   <motion.button
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
-                    className="border-2 border-blue-900 px-4 py-2 rounded-full hover:bg-blue-900 hover:text-white"
+                    onTap={{
+
+                    }}
+                    className={buttons}
                     type="submit"
                     onClick={() => this.handleClick(car)}
                   >
@@ -97,12 +103,18 @@ class AllCars extends React.Component {
                 </div>
                 {this.props.isAdmin ? (
                   <div>
-                    <button
+                    <motion.button
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
+                    onTap={{
+
+                    }}
+                    className={buttons}
                       type="submit"
                       onClick={() => this.props.deleteCar(car.id)}
                     >
                       Remove
-                    </button>
+                    </motion.button>
                   </div>
                 ) : (
                   <></>

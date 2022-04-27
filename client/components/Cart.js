@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { modifyCartQuantity, removeAllFromCart, removeFromCart } from '../store/cartStore'
 import { addToOrders } from '../store/orderStore'
+import { buttons } from '../styleClassNames'
 /**
  * COMPONENT
  */
@@ -62,7 +63,7 @@ class Cart extends React.Component{
                                     <div><img src={cartItem.item.imageUrl}/></div>
                                     <div><h2>Price: {cartItem.item.price}</h2></div>
                                     <div><h2>Quantity: {cartItem.quantity} </h2><input type='number' value={cartItem.quantity} name={cartItem.item.id} onChange={(e)=>{this.handleQuantity(e,cartItem.item)}}/></div>
-                                    <div><button type='button' onClick={()=>{this.handleRemoveItem(cartItem.item.id)}}>Remove Item</button></div>
+                                    <div><button className={buttons} type='button' onClick={()=>{this.handleRemoveItem(cartItem.item.id)}}>Remove Item</button></div>
                                 </div>
                                 )
                             }
@@ -73,7 +74,7 @@ class Cart extends React.Component{
                 </div>
                 <div><h2>Number of items in cart: {numberOfItems}</h2></div>
                 <div><h2>Subtotal: {cartTotal}</h2></div>
-                <div><button type='button' onClick={()=> (this.handleCheckout(cartdata, cartdata[0].quantity))}> Checkout</button> </div>
+                <div><button className={ buttons } type='button' onClick={()=> (this.handleCheckout(cartdata, cartdata[0].quantity))}> Checkout</button> </div>
             </div>
         )
     };
